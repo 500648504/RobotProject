@@ -10,6 +10,7 @@ import lejos.utility.Delay;
 public class Marvin {
 	
 	Brick brick;
+	// Test 5 - juni 
 	
 	public Marvin() {
 		super();
