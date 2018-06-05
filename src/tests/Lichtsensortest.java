@@ -1,10 +1,13 @@
 package tests;
 
+//nog aan geklooid.... werkt nu niet meer Jorg
+
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Sound;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.Color;
+import lejos.robotics.SampleProvider;
 import lejos.utility.Delay;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.lcd.LCD;
@@ -25,7 +28,9 @@ public class Lichtsensortest {
 		public void ambientLightTest () {
 			
 			//colorsensor naam geeft
-	        EV3ColorSensor color = new EV3ColorSensor(SensorPort.S3);
+	        EV3ColorSensor colorsensor = new EV3ColorSensor(SensorPort.S3);
+	        SampleProvider colorsensorId = colorsensor.getColorIDMode();
+	        float[] current_sample;
 
 	        //dit stuk uit de code
 	        System.out.println("Color Demo");
@@ -41,8 +46,9 @@ public class Lichtsensortest {
 	        // run until escape button pressed.	    	        
 	        while (Button.ESCAPE.isUp())		//loop zolang escape niet ingedrukt is
 	        {
-	            LCD.clear(4);					//maak leeg, nog even precies uitzoeken?
-	            System.out.println("test " + color.getColorID());
+	            colorsensorId.fetchSample(current_sample, 0);
+	        	//LCD.clear(4);					//maak leeg, nog even precies uitzoeken?
+	            System.out.println("test " + current_sample.getColorID());
 	            Delay.msDelay(250);				//wacht 250 ms om loop niet te snel te maken
 	        }
 

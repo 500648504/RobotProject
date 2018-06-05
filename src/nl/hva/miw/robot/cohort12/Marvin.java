@@ -6,6 +6,7 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
+import muziek.MuziekLezer;
 import tests.*;
 
 public class Marvin {
@@ -52,6 +53,14 @@ public class Marvin {
 		}
 	}
 	
+	
+	public void muziek () {
+		MuziekLezer muziekLezer = new MuziekLezer (brick) ;
+		muziekLezer.leesMuziek();
+		}
+
+
+
 	
 	
 	//testmethode voor lichttest
