@@ -6,7 +6,7 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
-import tests.Lichtsensortest;
+import tests.*;
 
 public class Marvin {
 	
@@ -24,6 +24,32 @@ public class Marvin {
 		Marvin marvin = new Marvin();		
 		
 		marvin.lichttest();
+		
+		
+		// Code: Bobby (Object PIDController)
+		PIDController pid = new PIDController(); 
+		System.out.println("STARTING MAIN");
+		Button.waitForAnyPress();
+		while (true) {
+			if (Button.ESCAPE.isDown())
+				break;
+			pid.run(); 
+		}
+		
+		// Code: Bobby (Object VarPID)
+		VarPID vpid = new VarPID(); 
+		Button.waitForAnyPress();
+		while (true) {
+			if (Button.ESCAPE.isDown() && Button.ENTER.isDown())
+				break;
+			if (Button.ESCAPE.isDown()) 
+				vpid.set();
+			// bb.run();
+			// p.run();
+			// pi.run();
+			// pid.run();
+			vpid.run();
+		}
 	}
 	
 	
