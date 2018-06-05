@@ -56,8 +56,8 @@ public class Marvin {
 	
 	//testmethode voor lichttest
 	public void lichttest() {
-		Lichtsensortest lichtsensortest = new Lichtsensortest(brick);
-		lichtsensortest.ambientLightTest();
+//		Lichtsensortest lichtsensortest = new Lichtsensortest(brick);
+//		lichtsensortest.ambientLightTest();
 	}
 	
 	
