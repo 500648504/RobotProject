@@ -20,21 +20,24 @@ public class MuziekLezer {
 	}
 	
 	public ArrayList<Integer> leesMuziek() {
-	EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S3);
+	EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	
 	SampleProvider kleurLezer = sensor.getColorIDMode();
-	//SampleProvider reflectedLight = new autoAdjustFilter(kleurlezer);
+	SampleProvider kleurLezer = new autoAdjustFilter(kleurlezer);
 	
+	int sampleSize = reflectedLight.sampleSize();
+    float[] sample = new float[sampleSize];
+    
 	int sampleteller = 0;
 	ArrayList <Integer> sampleLijst = new ArrayList<>(); 
 	    while (Button.ESCAPE.isUp()) {
-	      sampleteller ++;
+	      
 	    	/*
 	       * Get a fresh sample from the filter. (The filter gets it from its
 	       * source, the kleurLezer)
 	       */
 	      kleurLezer.fetchSample(sample, 0);
-	      int currentSample = (int)sample[0];
+	      int currentSample = (Math.round(sample[sampleteller]));
 	      sampleLijst.add(currentSample);
 	      System.out.println(currentSample);
 	      
@@ -47,7 +50,7 @@ public class MuziekLezer {
 //	        
 //	        
 //	      }
-	      
+	      sampleteller ++;
 	      Delay.msDelay(1000);
 	    }
 	    /* When ready close the sensor */

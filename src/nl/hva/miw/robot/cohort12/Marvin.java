@@ -24,7 +24,7 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();		
 		
-		marvin.lichttest();
+		marvin.muziek();
 		
 		//Dit is een comment van niks
 		
