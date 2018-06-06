@@ -71,14 +71,15 @@ public class RobotLauncher {
 				case 2:
 					MuziekLezer MuziekReader = new MuziekLezer();
 					MuziekReader.testRun();
-					break; 
+					menuLoop = false;
+					break;
 				case (3):
 					System.out.println ("Volgt nog");
-					break; 
+					menuLoop = false;
+				break; 
 			}
 		}
 		System.out.println("Gestopt");
-		Delay.msDelay(1000);
 	}
 	
 	
