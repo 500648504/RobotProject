@@ -19,7 +19,7 @@ public class PIDController {
 	public void run() {
 		sensorData = Robot.pollSensor(true);
 		float err = TARGET - sensorData;
-		integral *= 1.02; 
+		integral *= 0.98; 
 		integral += err;
 		deriv = err - lastErr; 
 		lastErr = err; 

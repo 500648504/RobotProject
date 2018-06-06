@@ -39,7 +39,8 @@ public class Marvin {
 			pid.run(); 
 		}
 		
-		// Code: Bobby (Object VarPID)
+		// Code: Bobby (Object VarPID)  -> Morgen uitzetten, testen of het dan nog steeds werkt.
+		// Methode driver test is zonder VarPID
 		VarPID vpid = new VarPID(); 
 		Button.waitForAnyPress();
 		while (true) {
