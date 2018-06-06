@@ -14,8 +14,16 @@ public class MuziekLezer {
 	private Brick brick;
 	float[] sample;
 
+	public MuziekLezer() {
+	
+	}
+	
 	public MuziekLezer(Brick brick) {
 		this.brick = brick;
+	}
+	
+	public void testRun() {
+		return;
 	}
 
 	public ArrayList<Integer> leesMuziek() {

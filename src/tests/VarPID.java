@@ -6,6 +6,7 @@ import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.lcd.TextLCD;
 import lejos.utility.Delay;
+import lijnvolgen.Robot;
 import tests.*;
 
 public class VarPID {

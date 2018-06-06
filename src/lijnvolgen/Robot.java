@@ -1,4 +1,4 @@
-package tests;
+package lijnvolgen;
 
 import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
