@@ -24,12 +24,11 @@ public class Marvin {
 	public static void main(String[] args) {
 		Marvin marvin = new Marvin();		
 		
-		marvin.muziek();
+//		marvin.muziek();
+
 		
-		//Dit is een comment van niks
 		
-		
-		// Code: Bobby (Object PIDController)
+//		 Code: Bobby (Object PIDController)
 		PIDController pid = new PIDController(); 
 		System.out.println("STARTING MAIN");
 		Button.waitForAnyPress();
@@ -41,36 +40,36 @@ public class Marvin {
 		
 		// Code: Bobby (Object VarPID)  -> Morgen uitzetten, testen of het dan nog steeds werkt.
 		// Methode driver test is zonder VarPID
-		VarPID vpid = new VarPID(); 
-		Button.waitForAnyPress();
-		while (true) {
-			if (Button.ESCAPE.isDown() && Button.ENTER.isDown())
-				break;
-			if (Button.ESCAPE.isDown()) 
-				vpid.set();
-			// bb.run();
-			// p.run();
-			// pi.run();
-			// pid.run();
-			vpid.run();
-		}
+//		VarPID vpid = new VarPID(); 
+//		Button.waitForAnyPress();
+//		while (true) {
+//			if (Button.ESCAPE.isDown() && Button.ENTER.isDown())
+//				break;
+//			if (Button.ESCAPE.isDown()) 
+//				vpid.set();
+//			// bb.run();
+//			// p.run();
+//			// pi.run();
+//			// pid.run();
+//			vpid.run();
+//		}
 	}
 	
 	
-	public void muziek () {
-		MuziekLezer muziekLezer = new MuziekLezer (brick) ;
-		muziekLezer.leesMuziek();
-		}
+//	public void muziek () {
+//		MuziekLezer muziekLezer = new MuziekLezer (brick) ;
+//		muziekLezer.leesMuziek();
+//		}
 
 
 
 	
 	
 	//testmethode voor lichttest
-	public void lichttest() {
+//	public void lichttest() {
 //		Lichtsensortest lichtsensortest = new Lichtsensortest(brick);
 //		lichtsensortest.ambientLightTest();
-	}
+//	}
 	
 	
 	

@@ -14,7 +14,7 @@ public class VarPID {
 		float[] P_CONTROL = {265,265};
 		float[] I_CONTROL = {30,30};
 		float[] D_CONTROL = {567,567};
-		float[] BASE_SPEED = {200,320}; 
+		float[] BASE_SPEED = {200,200}; 
 		float leftSpeed, rightSpeed; 
 		float sensorData;
 		float integral = 0;

@@ -3,10 +3,10 @@ package tests;
 public class PIDController { 
 
 	final float TARGET = Robot.COLOUR_VALUES[2];
-	final float P_CONTROL = 350;
-	final float I_CONTROL = 30;
-	final float D_CONTROL = 500;
-	final float BASE_SPEED = 250; 
+	final float P_CONTROL = 265;	//was 350
+	final float I_CONTROL = 30;		//was 30
+	final float D_CONTROL = 567;	//was 500
+	final float BASE_SPEED = 200; 	//was 250
 	float leftSpeed, rightSpeed; 
 	float sensorData;
 	float integral = 0;
