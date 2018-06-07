@@ -6,9 +6,14 @@ import lejos.hardware.sensor.EV3ColorSensor;
 
 class Robot {
 
-	public static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+//	public static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+//	public static float[] COLOUR_VALUES = { 0.102f, 0.160f, 0.32f, 0.507f, 0.582f }; 
+//	// most black to most white 
+		public static EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	public static float[] COLOUR_VALUES = { 0.102f, 0.160f, 0.32f, 0.507f, 0.582f }; 
 	// most black to most white 
+	
+	
 	
 
 	public static void drive(float l, float r) {
