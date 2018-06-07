@@ -66,7 +66,8 @@ public class RobotLauncher {
 							showMenu();
 							break;
 						}
-					pid.run(); 
+
+						pid.run(); 
 					} 
 					break; 
 				case 2:
