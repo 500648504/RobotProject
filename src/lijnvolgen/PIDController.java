@@ -9,8 +9,7 @@ public class PIDController {
 	
 	//Variabelen
 	public EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	public static float[] COLOUR_VALUES = { 0.102f, 0.160f, 0.32f, 0.507f, 0.582f }; // most black to most white
-	final float TARGET = PIDController.COLOUR_VALUES[2];
+	final float TARGET = 0.37f; //originele waarde was 0.32f, 0.35f was beter een grijst-tint, geen zwart (om over gat te komen)
 	final float P_CONTROL = 265;	//P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde te komen
 	final float I_CONTROL = 30;		//I = Integrator. Kijkt naar duur/tijd en groote van afwijking ten opzichte van de lijn.
 	final float D_CONTROL = 567;	//D = Differantiator. Kijkt niet naar de afwijking zelf, maar naar hoe snel deze groeit.
@@ -20,21 +19,15 @@ public class PIDController {
 	float integral = 0;
 	float lastErr = 0; 
 	float deriv = 0; 
-	final double MAX_AFWIJKING_NAAR_BOVEN = 1.05;
-	final double MAX_AFWIJKING_NAAR_BENEDEN = 0.95;
+	final float MAX_AFWIJKING_NAAR_BOVEN = 1.025f;
+	final float MAX_AFWIJKING_NAAR_BENEDEN = 0.955f;
 
 	
 
 	public void run() {
 		// De sensor kijkt
-		sensorData = pollSensor(true);
-		
-		//De bedoeling is dat hij nog even wacht met corrigeren als de lijn niet waargenomen wordt,
-		// dit ivm gat in de te volgen lijn.
-		if (sensorData >= MAX_AFWIJKING_NAAR_BENEDEN * TARGET  || sensorData <= MAX_AFWIJKING_NAAR_BOVEN * TARGET) {
-				Delay.msDelay(2000);
-		}
-		
+		sensorData = pollSensor(true);		
+
 		// Corrigeren koers om op de lijn te blijven
 		float err = TARGET - sensorData;
 		integral *= 0.98; 
