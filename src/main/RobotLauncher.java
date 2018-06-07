@@ -64,8 +64,8 @@ public class RobotLauncher {
 							menuLoop = false;
 							break;
 						}
-					pid.run(); 
-					//Delay.msDelay(20);		//delay om hele snelle loop te voorkomen - minder chrashes?
+						pid.run(); 
+						//Delay.msDelay(20);		//delay om hele snelle loop te voorkomen - minder chrashes?
 					} 
 					break; 
 				case 2:
