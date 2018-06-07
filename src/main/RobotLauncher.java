@@ -3,6 +3,7 @@ import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
 import lejos.hardware.ev3.LocalEV3;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.Motor;
 import lejos.utility.Delay;
@@ -88,6 +89,7 @@ public class RobotLauncher {
 		
 	}
 	public static void showMenu() {
+		LCD.clearDisplay();
 		System.out.println("Kies programma:");
 		System.out.println ("Links:  Lijn");
 		System.out.println ("Midden: Muziek");
