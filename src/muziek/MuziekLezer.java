@@ -1,9 +1,11 @@
 package muziek;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
+import lejos.hardware.Sound;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
@@ -26,8 +28,19 @@ public class MuziekLezer {
 //	}
 	
 	public void testRun() {
-		leesMuziek();
-		System.out.println(sampleLijst.toString());
+	File testwav1 = new File("test.wav");
+	File testwav2 = new File("test8u2.wav");
+		System.out.println("Speel sample 1");
+		Sound.playSample(testwav1, 200);
+		System.out.println("Druk op een toets");
+		System.out.println("Speel sample 2");
+		Sound.playSample(testwav2, 200);
+		System.out.println("Druk op een toets");
+		Button.waitForAnyPress();
+		
+		
+		//leesMuziek();
+		//System.out.println(sampleLijst.toString());
 	}
 
 	public void leesMuziek() {
