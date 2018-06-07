@@ -16,35 +16,36 @@ public class MuziekLezer {
 
 	private Brick brick;
 	
-	private final int LEESSNELHEID = 100;
+	private final int LEESSNELHEID = 800;
 	private ArrayList<Integer> sampleLijst = new ArrayList<>();
 
 	public MuziekLezer() {
 	
 	}
 	
-//	public MuziekLezer(Brick brick) {
-//		this.brick = brick;
-//	}
+	public MuziekLezer(Brick brick) {
+		this.brick = brick;
+	}
 	
 	public void testRun() {
-	File testwav1 = new File("test.wav");
-	File testwav2 = new File("test8u2.wav");
-		System.out.println("Speel sample 1");
-		Sound.playSample(testwav1, 200);
-		System.out.println("Druk op een toets");
-		System.out.println("Speel sample 2");
-		Sound.playSample(testwav2, 200);
-		System.out.println("Druk op een toets");
+		
+		
+		
+		
+		
+		
+		leesMuziek();
 		Button.waitForAnyPress();
-		
-		
-		//leesMuziek();
-		//System.out.println(sampleLijst.toString());
+//	System.out.println(sampleLijst.toString());
 	}
+	
+	
 
 	public void leesMuziek() {
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+		Motor.B.resetTachoCount();
+		Motor.C.resetTachoCount();
+		
 					//sensor.getRedMode();
 					//int sampleSize = sensor.sampleSize();
 				
@@ -54,34 +55,41 @@ public class MuziekLezer {
 		int currentSample;
 		int sampleteller = 0;
 
-//		Motor.B.setSpeed(LEESSNELHEID);
-//		Motor.C.setSpeed(LEESSNELHEID);
-//		Motor.B.forward();
-//		Motor.C.forward();
+		Motor.B.setSpeed(LEESSNELHEID);
+		Motor.C.setSpeed(LEESSNELHEID);
+		Motor.B.forward();
+		Motor.C.forward();
 		
-		
-
-		while (Button.ESCAPE.isUp()) {
-			currentSample = sensor.getColorID();
-			System.out.println("test " + sampleteller + " " + sensor.getColorID());
-			sampleLijst.add(currentSample);
+		while (Motor.B.getTachoCount() <= 1000) {
 			
+			
+	
+
+			if  (Motor.B.getTachoCount() % 150 == 0) {
+				
+			
+			currentSample = sensor.getColorID();
+			System.out.println("sample " + sampleteller + " " + sensor.getColorID());
+			System.out.println(Motor.B.getTachoCount());
+			sampleLijst.add(currentSample);
+			sampleteller++;
+			}
 			//sensor.getRGBMode().fetchSample(sample, 0);
 			//currentSample = (int)sample[0];
 			//			System.out.println("test " + sampleteller + " " + currentSample);
 			//			sampleLijst.add(currentSample);
 			
-		sampleteller++;
-		Delay.msDelay(1000);
-		
+			
 		}
 		
 		
 		
 		// When ready close the sensor */
+		
 		sensor.close();
-//		Motor.B.stop();
-//		Motor.C.stop();
+		
+		Motor.B.stop(true);
+		Motor.C.stop(true);
 		return;
 
 	}

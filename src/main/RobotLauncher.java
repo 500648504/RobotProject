@@ -33,6 +33,8 @@ public class RobotLauncher {
 		public static void main(String[] args) {
 		RobotLauncher deRijdendeRobot = new RobotLauncher();			// Aanmaken object
 		deRijdendeRobot.startMenu();									// Openen menu
+		
+
 		}
 	
 	
@@ -40,10 +42,7 @@ public class RobotLauncher {
 	public void startMenu() {
 		boolean menuLoop = true;
 		
-		System.out.println("Kies welk programma u wilt draaien:");
-		System.out.println ("Links: Lijn");
-		System.out.println ("Midden:  Muziek");
-		System.out.println ("Rechts: Volgt nog");
+		showMenu();
 		
 		
 		while (menuLoop) {
@@ -51,6 +50,7 @@ public class RobotLauncher {
 			if(Button.LEFT.isDown())  selection = 1;
 			if(Button.ENTER.isDown()) selection = 2;
 			if(Button.RIGHT.isDown()) selection = 3;
+			if(Button.ESCAPE.isDown()) selection = 4;
 
 
 			switch (selection) {
@@ -61,7 +61,7 @@ public class RobotLauncher {
 						if (Button.ESCAPE.isDown()) {
 							Motor.B.stop();
 							Motor.C.stop();
-							menuLoop = false;
+							showMenu();
 							break;
 						}
 					pid.run(); 
@@ -71,18 +71,28 @@ public class RobotLauncher {
 				case 2:
 					MuziekLezer MuziekReader = new MuziekLezer();
 					MuziekReader.testRun();
-					menuLoop = false;
+					showMenu();
 					break;
 				case (3):
 					System.out.println ("Volgt nog");
-					menuLoop = false;
+					showMenu();
 				break; 
-			}
+				case (4):
+					menuLoop=false;
+				break;
+					
+					}
 		}
 		
 		System.out.println("Gestopt");
 		
-		startMenu();
+	}
+	public static void showMenu() {
+		System.out.println("Kies programma:");
+		System.out.println ("Links:  Lijn");
+		System.out.println ("Midden: Muziek");
+		System.out.println ("Rechts: Volgt nog");
+		System.out.println ("Escape: EV3 menu");
 	}
 	
 	
