@@ -79,7 +79,10 @@ public class RobotLauncher {
 				break; 
 			}
 		}
+		
 		System.out.println("Gestopt");
+		
+		startMenu();
 	}
 	
 	
