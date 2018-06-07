@@ -1,4 +1,5 @@
 package main;
+import doolhof.Mazerunner;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -56,7 +57,7 @@ public class RobotLauncher {
 
 			switch (selection) {
 				case 1:
-					System.out.println ("Lijn volgen");
+					System.out.println ("\nStart Lijn Volgen");
 					PIDController pid = new PIDController(); 				
 					while (true) {
 						if (Button.ESCAPE.isDown()) {
@@ -66,35 +67,37 @@ public class RobotLauncher {
 							break;
 						}
 					pid.run(); 
-					//Delay.msDelay(20);		//delay om hele snelle loop te voorkomen - minder chrashes?
 					} 
 					break; 
 				case 2:
+					System.out.println ("\nStart Muziek Speler");
 					MuziekLezer MuziekReader = new MuziekLezer();
 					MuziekReader.testRun();
 					showMenu();
 					break;
 				case (3):
-					System.out.println ("Volgt nog");
+					System.out.println ("\nStart Maze Runner");
+					Mazerunner Mazerunner = new Mazerunner();	
+					Mazerunner.runMaze();
 					showMenu();
-				break; 
+					break; 
 				case (4):
 					menuLoop=false;
-				break;
+					break;
 					
 					}
 		}
 		
-		System.out.println("Gestopt");
+		System.out.println("\nGestopt");
 		
 	}
 	public static void showMenu() {
-		LCD.clearDisplay();
-		System.out.println("Kies programma:");
-		System.out.println ("Links:  Lijn");
-		System.out.println ("Midden: Muziek");
-		System.out.println ("Rechts: Volgt nog");
-		System.out.println ("Escape: EV3 menu");
+		
+		System.out.println ("Kies programma:");
+		System.out.println ("Links: Lijn");
+		System.out.println ("Midden:Muziek");
+		System.out.println ("Rechts:MazeRunner");
+		System.out.println ("Escape:EV3 menu");
 	}
 	
 	
