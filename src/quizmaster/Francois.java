@@ -6,6 +6,7 @@ import lejos.hardware.Brick;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
+import quizmaster.FysiekeReacties;
 
 /**
  * Deze Class is de class die de functionaliteit voor de interactieve quiz bevat.
@@ -26,6 +27,7 @@ public class Francois {
 	EV3TouchSensor rechtsTouch = new EV3TouchSensor(SensorPort.S4);
 	private Brick brick;
 	private TextLCD display;
+	private FysiekeReacties reacties = new FysiekeReacties();
 	
 	
 	// Constructor voor quizmaster Francois
@@ -37,6 +39,7 @@ public class Francois {
 	
 	// Start de Quizzzzz!
 	public void runQuiz() {
+		reacties.schudHoofd(2);
 		displayIntro();
 		eersteVraag();
 	}
@@ -70,7 +73,7 @@ public class Francois {
 	
 	// Intro voor quiz, Francois stelt zich voor.
 	public void displayIntro() {
-		wisAlleRegels();
+		display.clear();
 		display.drawString("Welkom! Ik ben uw", 0, 1);
 		display.drawString("Quizmaster!", 0, 2);
 		display.drawString("Ik heet Francois!", 0, 3);
@@ -82,7 +85,7 @@ public class Francois {
 	// De eerste vraag, volgt direct op de introductie van de Quiz functionaliteit.
 	// Voor alle vragen geldt: de opmaak en weergave wordt geregeld in de methode stelVraag().
 	public void eersteVraag() {
-		wisAlleRegels();
+		display.clear();
 		String vraagR1 = "En, en en?";
 		String vraagR2 = "Wat vonden jullie?";
 		String optie1 = "Geweldig!";
@@ -101,7 +104,7 @@ public class Francois {
 	// Algemene stel vraag layout, de methodes met de vragen definieren de strings die ingevuld
 	// moeten worden in deze algemene methode.
 	public int stelVraag(String vraagR1, String vraagR2, String optie1, String optie2) {
-		wisAlleRegels();
+		display.clear();
 		display.drawString(vraagR1, 0, 1);
 		display.drawString(vraagR2,  0, 2);
 		display.drawString(optie1, 0, 5);
@@ -111,16 +114,6 @@ public class Francois {
 		return getSensorInput();	
 	}
 	
-	// Algemene methode die alle 8 de regels van de LCD display wist.
-	public void wisAlleRegels() {
-		display.clear();
-		//display.clear(2);
-		//display.clear(3);
-		//display.clear(4);
-		//display.clear(5);
-		//display.clear(6);
-		//display.clear(7);
-		//display.clear(8);		
-	}
+	
 	
 }
