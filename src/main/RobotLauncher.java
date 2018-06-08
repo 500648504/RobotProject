@@ -1,5 +1,6 @@
 package main;
 import doolhof.Mazerunner;
+import quizmaster.Francois;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -29,6 +30,7 @@ public class RobotLauncher {
 		public RobotLauncher() {
 			super();
 			brick = LocalEV3.get();					// LocalEV 3 te benaderen met de cursor erop te staan en op C klikken
+			TextLCD display = brick.getTextLCD();
 		}
 		
 		//main method, nieuwe Marvin gedefinieerd en roept test aan
@@ -79,9 +81,12 @@ public class RobotLauncher {
 					showMenu();
 					break;
 				case (3):
-					System.out.println ("\nStart Maze Runner");
-					Mazerunner Mazerunner = new Mazerunner();	
-					Mazerunner.runMaze();
+					//System.out.println ("\nStart Maze Runner");
+					//Mazerunner Mazerunner = new Mazerunner();	
+					//Mazerunner.runMaze();
+					System.out.println("\nStart de Quiz");
+					Francois boulanger = new Francois(brick);
+					boulanger.runQuiz();
 					showMenu();
 					break; 
 				case (4):
@@ -99,7 +104,7 @@ public class RobotLauncher {
 		System.out.println ("Kies programma:");
 		System.out.println ("Links: Lijn");
 		System.out.println ("Midden:Muziek");
-		System.out.println ("Rechts:MazeRunner");
+		System.out.println ("Rechts:Quiz");
 		System.out.println ("Escape:EV3 menu");
 	}
 	
