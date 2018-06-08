@@ -9,12 +9,13 @@ import lejos.utility.Delay;
 import quizmaster.FysiekeReacties;
 
 /**
- * Deze Class is de class die de functionaliteit voor de interactieve quiz bevat.
+ * Deze Class is de class die de hoofd functionaliteit voor de interactieve quiz bevat.
  * Quizmaster Francois vraagt de gebruiker van alles en geeft per vraag twee opties
  * als antwoord. De gebruiker geeft antwoord door op 1 van de 2 druksensoren van de 
  * robot te drukken. Afhankelijk van het antwoord dat de gebruiker geeft, wordt 
  * een andere vraag als volgende vraag gesteld. Voor het exacte schema, zie de
  * bijbehorende documentatie.
+ * De bewegingen en andere reacties van de robot worden gedefinieerd in de FysiekeReacties class.
  *
  */
 
@@ -42,6 +43,7 @@ public class Francois {
 		reacties.schudHoofd(2);
 		displayIntro();
 		eersteVraag();
+		
 	}
 	
 	//links 1 en rechts 4 als je voor de robot zit
@@ -95,22 +97,65 @@ public class Francois {
 		
 		if (keuze == ANTWOORD_LINKS) {
 			// launch methode met vraag om alles nog eens te laten zien (alles = lijn volgen en muziek)
+			nogEenKeer();
 		} else {
 			// launch methode met vraag over Jodi Bernal
 		}		
 	}
 	
 	
+	// Vraag 2.1 om alles nog eens te laten zien
+	public void nogEenKeer() {
+		display.clear();
+		String vraagR1 = "Zal ik alles nog";
+		String vraagR2 = "eens laten zien?";
+		String optie1 = "Que Si!!";
+		String optie2 = "Que No!";
+		
+		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		
+		if (keuze == ANTWOORD_LINKS) {
+			// terug naar menu
+			
+		} else {
+			display.clear();
+			display.drawString("Vakantie!!!", 0, 1);
+			// launch methode met vraag over Jodi Bernal
+		}
+	}
+	
+	// Vraag 2.2: fan van Jodi Bernal
+	public void fanJodiBernal() {
+		display.clear();
+		String vraagR1 = "Ben jij dan geen";
+		String vraagR2 = "fan van Jodi?";
+		String optie1 = "Natuurlijk niet!";
+		String optie2 = "Zeg ik niet!";
+		
+		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		
+		if (keuze == ANTWOORD_LINKS) {
+			// launch methode was de lijn wel ok?
+			
+		} else {
+			display.clear();
+			display.drawString("Dankje, tot ziens!", 0, 1);
+			// terug naar het menu
+		}
+	}
+	
+	
+	
 	// Algemene stel vraag layout, de methodes met de vragen definieren de strings die ingevuld
 	// moeten worden in deze algemene methode.
 	public int stelVraag(String vraagR1, String vraagR2, String optie1, String optie2) {
 		display.clear();
-		display.drawString(vraagR1, 0, 1);
-		display.drawString(vraagR2,  0, 2);
-		display.drawString(optie1, 0, 5);
-		display.drawString(optie2, (18 - optie2.length()), 6);
-		display.drawString("(L)", 0, 8);
-		display.drawString("(R)", 16, 8);
+		display.drawString(vraagR1, 0, 0);
+		display.drawString(vraagR2,  0, 1);
+		display.drawString(optie1, 0, 4);
+		display.drawString(optie2, (18 - optie2.length()), 5);
+		display.drawString("(L)", 0, 7);
+		display.drawString("(R)", 16, 7);
 		return getSensorInput();	
 	}
 	
