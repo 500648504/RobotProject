@@ -36,6 +36,8 @@ public class RobotLauncher {
 		RobotLauncher deRijdendeRobot = new RobotLauncher();			// Aanmaken object
 		deRijdendeRobot.startMenu();									// Openen menu
 		
+		
+
 
 		}
 	
