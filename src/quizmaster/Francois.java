@@ -24,14 +24,14 @@ public class Francois {
 	private final static int ANTWOORD_RECHTS = 2;
 	EV3TouchSensor linksTouch = new EV3TouchSensor(SensorPort.S1);
 	EV3TouchSensor rechtsTouch = new EV3TouchSensor(SensorPort.S4);
-	Brick brick;
-	TextLCD display;
+	private Brick brick;
+	private TextLCD display;
 	
 	
 	// Constructor voor quizmaster Francois
 	public Francois(Brick brick) {
 		this.brick = brick;
-		TextLCD display = brick.getTextLCD();
+		this.display = brick.getTextLCD();
 	}
 	
 	
@@ -59,10 +59,10 @@ public class Francois {
 		
 		// Uitlezen welke van de twee was ingedrukt en feedback op scherm weergeven.
 		if (antwoordLinks[0] == 1) {
-			System.out.println("Links ingedrukt");
+			display.drawString("Links ingedrukt", 0, 1);
 			return ANTWOORD_LINKS;
 		} else {
-			System.out.println("Rechts ingedrukt");
+			display.drawString("Rechts ingedrukt", 0, 1);
 			return ANTWOORD_RECHTS;
 		}
 	}
@@ -70,7 +70,7 @@ public class Francois {
 	
 	// Intro voor quiz, Francois stelt zich voor.
 	public void displayIntro() {
-		display.clear(8);
+		wisAlleRegels();
 		display.drawString("Welkom! Ik ben uw", 0, 1);
 		display.drawString("Quizmaster!", 0, 2);
 		display.drawString("Ik heet Francois!", 0, 3);
@@ -80,7 +80,9 @@ public class Francois {
 	
 	
 	// De eerste vraag, volgt direct op de introductie van de Quiz functionaliteit.
+	// Voor alle vragen geldt: de opmaak en weergave wordt geregeld in de methode stelVraag().
 	public void eersteVraag() {
+		wisAlleRegels();
 		String vraagR1 = "En, en en?";
 		String vraagR2 = "Wat vonden jullie?";
 		String optie1 = "Geweldig!";
@@ -99,14 +101,26 @@ public class Francois {
 	// Algemene stel vraag layout, de methodes met de vragen definieren de strings die ingevuld
 	// moeten worden in deze algemene methode.
 	public int stelVraag(String vraagR1, String vraagR2, String optie1, String optie2) {
-		display.clear(8);
+		wisAlleRegels();
 		display.drawString(vraagR1, 0, 1);
 		display.drawString(vraagR2,  0, 2);
 		display.drawString(optie1, 0, 5);
-		display.drawString(optie2, 0, (18 - optie2.length()));
-		display.drawString("(L)", 0, 5);
-		display.drawString("(R)", 16, 5);
+		display.drawString(optie2, (18 - optie2.length()), 6);
+		display.drawString("(L)", 0, 8);
+		display.drawString("(R)", 16, 8);
 		return getSensorInput();	
+	}
+	
+	// Algemene methode die alle 8 de regels van de LCD display wist.
+	public void wisAlleRegels() {
+		display.clear();
+		//display.clear(2);
+		//display.clear(3);
+		//display.clear(4);
+		//display.clear(5);
+		//display.clear(6);
+		//display.clear(7);
+		//display.clear(8);		
 	}
 	
 }

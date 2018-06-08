@@ -30,7 +30,7 @@ public class RobotLauncher {
 		public RobotLauncher() {
 			super();
 			brick = LocalEV3.get();					// LocalEV 3 te benaderen met de cursor erop te staan en op C klikken
-			TextLCD display = brick.getTextLCD();
+			//TextLCD display = brick.getTextLCD();
 		}
 		
 		//main method, nieuwe Marvin gedefinieerd en roept test aan
@@ -44,9 +44,12 @@ public class RobotLauncher {
 	
 		
 	public void startMenu() {
-		boolean menuLoop = true;
 		
-		showMenu();
+		// Variabelen
+		boolean menuLoop = true;
+		TextLCD display = brick.getTextLCD();
+		
+		showMenu(display);
 		
 		
 		while (menuLoop) {
@@ -59,13 +62,13 @@ public class RobotLauncher {
 
 			switch (selection) {
 				case 1:
-					System.out.println ("\nStart Lijn Volgen");
+					display.drawString("Start Lijn Volgen", 0, 8);
 					PIDController pid = new PIDController(); 				
 					while (true) {
 						if (Button.ESCAPE.isDown()) {
 							Motor.B.stop();
 							Motor.C.stop();
-							showMenu();
+							showMenu(display);
 							break;
 						}
 
@@ -73,19 +76,19 @@ public class RobotLauncher {
 					} 
 					break; 
 				case 2:
-					System.out.println ("\nStart Muziek Speler");
+					display.drawString("Start Muziek Speler", 0, 8);
 					MuziekLezer MuziekReader = new MuziekLezer();
 					MuziekReader.testRun();
-					showMenu();
+					showMenu(display);
 					break;
 				case (3):
 					//System.out.println ("\nStart Maze Runner");
 					//Mazerunner Mazerunner = new Mazerunner();	
 					//Mazerunner.runMaze();
-					System.out.println("\nStart de Quiz");
+					display.drawString("Start de Quiz", 0, 8);
 					Francois boulanger = new Francois(brick);
 					boulanger.runQuiz();
-					showMenu();
+					showMenu(display);
 					break; 
 				case (4):
 					menuLoop=false;
@@ -94,16 +97,16 @@ public class RobotLauncher {
 					}
 		}
 		
-		System.out.println("\nGestopt");
+		display.drawString("Gestopt", 0, 8);
 		
 	}
-	public static void showMenu() {
+	public static void showMenu(TextLCD display) {
 		
-		System.out.println ("Kies programma:");
-		System.out.println ("Links: Lijn");
-		System.out.println ("Midden:Muziek");
-		System.out.println ("Rechts:Quiz");
-		System.out.println ("Escape:EV3 menu");
+		display.drawString("Kies programma:", 0, 1);
+		display.drawString("Links: Lijn", 0, 2);
+		display.drawString("Midden:Muziek", 0, 3);
+		display.drawString("Rechts:Quiz", 0, 4);
+		display.drawString("Escape:EV3 menu", 0, 5);
 	}
 	
 	
