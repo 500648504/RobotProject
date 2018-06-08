@@ -8,7 +8,7 @@ public class PIDController {
 
 	// Variabelen
 	public EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	final float TARGET = 0.37f; // originele waarde was 0.32f, 0.35f was beter een grijst-tint, geen zwart (om
+	final float TARGET = 0.35f; // originele waarde was 0.32f, 0.35f was beter een grijst-tint, geen zwart (om
 								// over gat te komen)
 	final float P_CONTROL = 265; // P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde
 									// te komen
@@ -25,6 +25,7 @@ public class PIDController {
 	final float MAX_AFWIJKING_NAAR_BOVEN = 1.025f;
 	final float MAX_AFWIJKING_NAAR_BENEDEN = 0.955f;
 
+	
 	public void run() {
 		// De sensor kijkt
 		sensorData = pollSensor(true);
