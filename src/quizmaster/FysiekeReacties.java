@@ -52,15 +52,15 @@ public class FysiekeReacties {
 	
 	System.out.println("Druk op een toets");
 	Button.waitForAnyPress();
-	}
+	//}
 	
 	// nu even zelfde methode voor testen public void wiggleWiggle(int aantal, int wiggleSpeed) {
 		
-		aantal = 2;
-		wiggleSpeed = 250;
-		Motor.B.setSpeed(wiggleSpeed);
+		aantal = 2;		//test waarden
+		int wiggleSpeed = 250;
 		
-	//}
+		Motor.B.setSpeed(wiggleSpeed);
+	}
 	
 	
 
