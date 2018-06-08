@@ -9,24 +9,24 @@ class Robot {
 	// Een robot kan rijden, het verschil in snelheid tussen de twee motoren
 	// bepaalt of hij links of rechts gaat.
 	public static void drive(float l, float r) {
-		// B-> to left C-> to right
-		Motor.B.setSpeed(Math.abs(l));
-		Motor.C.setSpeed(Math.abs(r));
+		// D-> to left A-> to right
+		Motor.D.setSpeed(Math.abs(l));
+		Motor.A.setSpeed(Math.abs(r));
 
 		if (l > 0) {
-			Motor.B.forward();
+			Motor.D.forward();
 		} else if (l < 0) {
-			Motor.B.backward();
+			Motor.D.backward();
 		} else {
-			Motor.B.stop(true);
+			Motor.D.stop(true);
 		}
 
 		if (r > 0) {
-			Motor.C.forward();
+			Motor.A.forward();
 		} else if (r < 0) {
-			Motor.C.backward();
+			Motor.A.backward();
 		} else {
-			Motor.C.stop(true);
+			Motor.A.stop(true);
 		}
 	}
 
