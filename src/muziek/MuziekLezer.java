@@ -8,13 +8,18 @@ import lejos.hardware.Sound;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
+import lejos.utility.Delay;
 
 public class MuziekLezer {
 
 	private Brick brick;
 	private final int LEESSNELHEID = 240;
+	private final int STOP_CONDITIE = 3;
+	private final int DEFAULT_SAMPLE = -1;
 	private ArrayList<Integer> sampleLijst = new ArrayList<>();
-
+	int currentSample;
+	
+	
 	public MuziekLezer() {
 	}
 
@@ -27,6 +32,11 @@ public class MuziekLezer {
 	}
 
 	public void leesMuziek() {
+		for (int vul = 0 ; vul < STOP_CONDITIE ; vul++) {
+		sampleLijst.add(vul, DEFAULT_SAMPLE); 		// hier wordt de array gevuld met fictieve waarde, zodat de array uitgelezen kan worden.	
+		}													// Bij 3x zwart (is nummer 7) stopt de robot met rijden, regel 49)
+		
+		
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 		// File groenGeluidObject = new File("test.wav"); // groen
 		Sound.setVolume(10);
@@ -39,18 +49,20 @@ public class MuziekLezer {
 
 		// boolean doorgaan = true;
 
+		
+
 		while (doorgaanMuziek()) {
 			if (Button.ESCAPE.isDown()) {
 				Motor.A.stop();
 				Motor.D.stop();
 				break;
 			}
-			int currentSample = -1;
 
 			if (Motor.A.getTachoCount() % 6 == 0) { // Als omwentelingen (modulo 150 = 0)
 				// De kleuren Scanner gaat aan.
 				currentSample = sensor.getColorID(); // Haalt gescande kleur op.
-				sampleLijst.add(currentSample); // Stopt gescande kleur sampleLijst Array
+				sampleLijst.add(0, currentSample); // Stopt gescande kleur sampleLijst Array
+				
 
 				switch (currentSample) {
 				case 0: // Rood (Toon A)
@@ -76,6 +88,7 @@ public class MuziekLezer {
 					break;
 				case 7: // Zwart (Geen toon)
 					System.out.println("Zwart");
+					Delay.msDelay(320);
 					break;
 				}
 			}
@@ -83,6 +96,7 @@ public class MuziekLezer {
 		sensor.close();
 		Motor.A.stop(true);
 		Motor.D.stop(true);
+		System.out.println(sampleLijst);
 		return;
 	}
 
