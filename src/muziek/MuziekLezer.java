@@ -12,43 +12,30 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
 
 public class MuziekLezer {
-
-	private Brick brick;										// De robot wordt geactiveerd zodat teksten op het scherm van de robot geplaatst kunnen worden
-//	private TextLCD display;									// De textLCD toont teksten op de robot.
-	private final int LEESSNELHEID = 240;						// Dit is hoe snel de robot rijdt.
-	private ArrayList<Integer> sampleLijst = new ArrayList<>();   // Arraylist, deze wordt gevuld met de kleurwaardes die gescand worden.
-	private final int STOP_CONDITIE = 3;					// Dit is voor de for-loop, er worden 3 begin-waardes in de kleuren array gezet (zie regel 35)
-	private final int DEFAULT_SAMPLE = -1;					// De drie beginwaardes van de array (zie regel 18 en regel 35)
-	int currentSample;										// De waarde van een lichtmeting (dit is een integer)
+							
+	private final int LEESSNELHEID = 240;				// Dit is hoe snel de robot rijdt.
+	private final int SCAN_SNELHEID = 6;
+	private final int MUZIEKVOLUME = 10;				//
+	private final int NOOT_LENGTE = 500;
+	private final int ZWART_CORR = 250;					// Als hij zwart leest speelt hij geen toon en scant snel teveel waarden. Een delay NOOT_LENGTE bleek teveel, vandaar een correctie
+	private final int NOOT_D = 293;
+	private final int NOOT_E = 329;
+	private final int NOOT_F = 349;
+	private final int NOOT_G = 391;
+	private final int NOOT_A = 440;
+	private final int KLEUR_ZWART = 7;						// 7 is zwart, nodig voor stopconditie
 	
-	// Reden: fictieve en rechte waardes in array
-	// Er is een methode die scant of er 3x zwart (= nummer 7) achter elkaar voorkomt.
-	// Daarom moet de array vooraf ingevuld worden, en komen er steeds nieuwe waardes bij.
-	// Als de array niet vooraf wordt ingevuld, dan geeft de methode om 3x zwart te controleren een error.
+	private ArrayList<Integer> sampleLijst = new ArrayList<>();   // Arraylist, deze wordt gevuld met de kleurwaardes die gescand worden.
+	int currentSample;										// De waarde van een lichtmeting (dit is een integer)
 	
 	
 	// Constructor
 	public MuziekLezer() {
 	}
 	
-	// Constructor
-	public MuziekLezer(Brick brick) {
-		this.brick = brick;
-	}
-
-	// Methode die de leesmuziek methode gaat starten.
-	public void testRun() {
-		leesMuziek();
-	}
-
-	public void leesMuziek() {
-		for (int vul = 0 ; vul < STOP_CONDITIE ; vul++) {
-		sampleLijst.add(vul, DEFAULT_SAMPLE); 		// hier wordt de array gevuld met fictieve waarde, zodat de array uitgelezen kan worden.	
-		}											// Bij 3x zwart (is nummer 7) stopt de robot met rijden)
-		
-		
+	public void leesMuziek() {	
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);		// Het object scanner wordt aangemaakt, de scanner kan nu gebruikt worden.
-		Sound.setVolume(10);											// Het geluid wordt op volume 10 gezet
+		Sound.setVolume(MUZIEKVOLUME);											// Het geluid wordt op volume 10 gezet
 		Motor.A.setSpeed(LEESSNELHEID);									// Snelheid wordt geactiveerd
 		Motor.D.setSpeed(LEESSNELHEID);
 		Motor.A.forward();												// De motoren gaan voorwaarts 
@@ -64,42 +51,30 @@ public class MuziekLezer {
 				break;
 			}
 
-			if (Motor.A.getTachoCount() % 6 == 0) { // Al de modulo van het aantal omwentelingen uitkomt op 0, dan: nieuwe scan. (modulo 6 = 0)
+			if (Motor.A.getTachoCount() % SCAN_SNELHEID == 0) { 	// Al de modulo van het aantal omwentelingen uitkomt op 0, dan: nieuwe scan. (modulo 6 = 0)
 				// De kleuren Scanner gaat aan.
-				currentSample = sensor.getColorID(); // Haalt gescande kleur op.
-				sampleLijst.add(0, currentSample); // Stopt gescande kleur sampleLijst Array
+				currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
+				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
 				
 
 				switch (currentSample) {				// Kiest op basis van de gescande kleur een switch.
-				case 0: 								// Rood geeft altijd het cijfer 0.
-					Sound.playTone(440, 500); 			// Frequentie & Duur, wij hebben hier dus zelf de toon A van gemaakt, namelijk frequentie 440 ingesteld.
-//					display.clear();					// Het display wordt leeggemaakt, voordat de nieuwe tekst wordt getoond.
-//					display.drawString("Rood", 0, 0); 	// Ter info laat de robot ook de gescande kleur zien, dit voor eventuele controles (gaat het scannen goed).
+				case 0: // Rood	 						// Rood geeft altijd het cijfer 0.
+					Sound.playTone(NOOT_A, NOOT_LENGTE);// Frequentie & Duur, wij hebben hier dus zelf de toon A van gemaakt, namelijk frequentie 440 ingesteld.
 					break;								// Speelt 1x kleur af, daarna break.
-				case 1: // Groen (Toon D)
-					Sound.playTone(293, 500);
-//					display.clear();
-//					display.drawString("Groen", 0, 0); 
+				case 1: // Groen 
+					Sound.playTone(NOOT_D, NOOT_LENGTE);
 					break; 
-				case 2: // Blauw (Toon E)
-					Sound.playTone(329, 500);
-//					display.clear();
-//					display.drawString("Blauw", 0, 0); 
+				case 2: // Blauw 
+					Sound.playTone(NOOT_E, NOOT_LENGTE);
 					break;
-				case 3: // Geel (Toon F)
-					Sound.playTone(349, 500);
-//					display.clear();
-//					display.drawString("Geel", 0, 0); 
+				case 3: // Geel 
+					Sound.playTone(NOOT_F, NOOT_LENGTE);
 					break;
 				case 6: // Wit (toon G)
-					Sound.playTone(391, 500);
-//					display.clear();
-//					display.drawString("Wit", 0, 0); 
+					Sound.playTone(NOOT_G, NOOT_LENGTE);
 					break;
 				case 7: // Zwart (Geen toon)
-//					display.clear();
-//					display.drawString("Zwart", 0, 0); 
-					Delay.msDelay(250);
+					Delay.msDelay(NOOT_LENGTE - ZWART_CORR);
 					break;
 				}
 			}
@@ -107,21 +82,21 @@ public class MuziekLezer {
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
 		Motor.A.stop(true);
 		Motor.D.stop(true);
-//		display.clear();
-//		display.drawString("sampleLijst", 0, 0); 	// De arraylist met gescande kleuren wordt getoond, dit is voor eventuele controles.
+	
 		return;
 	}
 
 	public boolean doorgaanMuziek() { // drie keer zwart is stop
-		if (sampleLijst.get(0) == 7 && sampleLijst.get(1) == 7 && sampleLijst.get(2) == 7) {		// als arraynummer 0, 1 en 2 zwart zijn
+		if (sampleLijst.size() < 3) { // eerst controleren of er wel 3 zijn
+			return true;
+		}
+		if (sampleLijst.get(0) == KLEUR_ZWART && sampleLijst.get(1) == KLEUR_ZWART && sampleLijst.get(2) == KLEUR_ZWART) {		// als arraynummer 0, 1 en 2 zwart zijn
 			return false;																			// dan is doorgaan = false
 		}
 		return true;																				// niet 3x zwart, dan doorgaan = true
 	}
 
 }
-
-
 
 
 

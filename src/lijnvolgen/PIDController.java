@@ -18,8 +18,7 @@ public class PIDController {
 
 	// Variabelen
 	public EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	final float TARGET = 0.32f; // originele waarde was 0.32f, 0.35f was beter een grijst-tint, geen zwart (om
-								// over gat te komen)
+	final float TARGET = 0.32f; // Dit is het doel van de sensor: alles onder 0.32f is nu Zwart
 	final float P_CONTROL = 265; // P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde
 									// te komen
 	final float I_CONTROL = 30; // I = Integrator. Kijkt naar duur/tijd en groote van afwijking ten opzichte van
@@ -32,8 +31,6 @@ public class PIDController {
 	float integral = 0;
 	float lastErr = 0;
 	float deriv = 0;
-//	final float MAX_AFWIJKING_NAAR_BOVEN = 1.025f;
-//	final float MAX_AFWIJKING_NAAR_BENEDEN = 0.955f;
 
 	
 	public void run() {
@@ -53,10 +50,6 @@ public class PIDController {
 
 	}
 	
-	// Zet de Brick klaar, zodat we de display kunnen gebruiken
-	//private Brick brick;
-	//private TextLCD display;
-	
 	// Lees met de sensor en krijg een kleurwaarde terug
 	// Sensor staat in red modus
 	public float pollSensor(boolean log) {
@@ -65,10 +58,7 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 	if (log) {
-			//display.clear();
-			//display.drawString("Sensor: ", 0, 0);
-			//display.drawInt((int)redsample[0], 0, 1);
-			
+
 			System.out.print("sensor: ");
 			System.out.println(redsample[0]);
 		}
