@@ -7,6 +7,7 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
 import quizmaster.FysiekeReacties;
+import quizmaster.DierenQuiz;
 
 /**
  * Deze Class is de class die de hoofd functionaliteit voor de interactieve quiz bevat.
@@ -22,13 +23,14 @@ import quizmaster.FysiekeReacties;
 public class Francois {
 
 	//Variabelen
-	private final static int ANTWOORD_LINKS = 1;
-	private final static int ANTWOORD_RECHTS = 2;
+	public final static int ANTWOORD_LINKS = 1;
+	public final static int ANTWOORD_RECHTS = 2;
 	EV3TouchSensor linksTouch = new EV3TouchSensor(SensorPort.S1);
 	EV3TouchSensor rechtsTouch = new EV3TouchSensor(SensorPort.S4);
 	private Brick brick;
 	private TextLCD display;
 	private FysiekeReacties reacties = new FysiekeReacties();
+	private DierenQuiz dierenquiz = new DierenQuiz(brick);
 	
 	
 	// Constructor voor quizmaster Francois
@@ -40,9 +42,10 @@ public class Francois {
 	
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		//reacties.schudHoofd(2);
-		//reacties.wiggle(2,200);
-		//reacties.pirouette(2,200);
+		reacties.schudHoofd();
+		reacties.wiggle();
+		reacties.pirouette();
+		reacties.scared();
 		displayIntro();
 		eersteVraag();
 		
@@ -152,8 +155,8 @@ public class Francois {
 		} else {
 			display.clear();
 			display.drawString("Dat is jammer!", 0, 0);
-			dankjewelTotZiens();
-			// terug naar het menu
+			startQuiz();
+			// Naar de daadwerkelijke quiz
 		}
 	}
 	
@@ -171,16 +174,17 @@ public class Francois {
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
 			display.drawString("Mooi!", 0, 0);
-			dankjewelTotZiens();
-			// terug naar het menu
+			startQuiz();
+			// naar de daadwerkelijke quiz
 		} else {
 			display.clear();
 			display.drawString("Jammer...", 0, 0);
 			display.drawString("Mijn programmeurs", 0, 1);
 			display.drawString("willen graag horen", 0, 2);
 			display.drawString("hoe het wel moest", 0, 3);
-			dankjewelTotZiens();
-			// terug naar het menu
+			Delay.msDelay(3000);
+			startQuiz();
+			// naar de daadwerkelijke quiz
 		}
 	}
 
@@ -196,6 +200,27 @@ public class Francois {
 		display.drawString("(L)", 0, 7);
 		display.drawString("(R)", 16, 7);
 		return getSensorInput();	
+	}
+	
+	// De daadwerkelijke start van de quiz, na het kort evalueren van de lijn en muziek functies
+	public void startQuiz() {
+		display.clear();
+		display.drawString("Dankje voor de", 0, 0);
+		display.drawString("korte evaluatie", 0, 1);
+		display.drawString("Maar nu de echte", 0, 3);
+		display.drawString("quizzzz!", 0, 4);
+		Delay.msDelay(3000);
+		display.clear();
+		display.drawString("Je kan 10 punten", 0, 0);
+		display.drawString("verdienen", 0, 1);
+		display.drawString("1 punt per vraag", 0, 2);
+		display.drawString("Op naar vraag 1", 0, 3);
+		quizVragen();
+	}
+	
+	// Naar de vragen van de quiz
+	public void quizVragen() {
+		dierenquiz.vraag1();
 	}
 	
 	// Methode waarin dankjewel en tot ziens wordt weergegeven (afsluiting en terug naar menu)
