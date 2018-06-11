@@ -13,9 +13,11 @@ import quizmaster.DierenQuiz;
  * Deze Class is de class die de hoofd functionaliteit voor de interactieve quiz bevat.
  * Quizmaster Francois vraagt de gebruiker van alles en geeft per vraag twee opties
  * als antwoord. De gebruiker geeft antwoord door op 1 van de 2 druksensoren van de 
- * robot te drukken. Afhankelijk van het antwoord dat de gebruiker geeft, wordt 
- * een andere vraag als volgende vraag gesteld. Voor het exacte schema, zie de
- * bijbehorende documentatie.
+ * robot te drukken. Eerst is er een aantal vragen over wat de robot hiervoor heeft
+ * laten zien (lijn volgen en muziek maken). Afhankelijk van het antwoord dat de gebruiker geeft, 
+ * wordt een andere vraag als volgende vraag gesteld. 
+ * Na het stukje terugkijken, start de uiteindelijke quiz met vragen over dieren.
+ * De dierenvragen staan allemaal in de class DierenQuiz.
  * De bewegingen en andere reacties van de robot worden gedefinieerd in de FysiekeReacties class.
  *
  */
@@ -221,6 +223,8 @@ public class Francois {
 	// Naar de vragen van de quiz
 	public void quizVragen() {
 		dierenquiz.vraag1();
+		//vraag 1 roept de volgende vraag aan, enzovoorts
+		dankjewelTotZiens();
 	}
 	
 	// Methode waarin dankjewel en tot ziens wordt weergegeven (afsluiting en terug naar menu)
