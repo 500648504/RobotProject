@@ -48,7 +48,7 @@ public class FysiekeReacties {
 	}
 	
 	//robot draait om zijn as
-	public void pirouette (int aantal) {
+	public void pirouette () {
 		rupsDraaiBeweging(PIROUETTE_DISTANCE, PIROUETTE_SPEED, BACKWARD);
 	}
 			
@@ -105,15 +105,15 @@ public class FysiekeReacties {
 	//en te stoppen als snelheid is 0
 	public void setSpeedAD(int speed) {
 		if (speed == STOP_SPEED) {
-			Motor.A.stop();
-			Motor.D.stop();
+			Motor.A.stop(true);
+			Motor.D.stop(true);
 			return;
 		}
 		Motor.A.setSpeed(speed);
 		Motor.D.setSpeed(speed);
 	}
 	
-	//algemene methode om beide motors (A en D) te resetten
+	//algemene methode om tellers beide motors (A en D) te resetten
 	public void resetCountAD() {
 		Motor.A.resetTachoCount();
 		Motor.D.resetTachoCount();

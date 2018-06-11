@@ -24,9 +24,9 @@ public class PIDController {
 									// te komen
 	final float I_CONTROL = 30; // I = Integrator. Kijkt naar duur/tijd en groote van afwijking ten opzichte van
 								// de lijn.
-	final float D_CONTROL = 567; // D = Differantiator. Kijkt niet naar de afwijking zelf, maar naar hoe snel
+	final float D_CONTROL = 500; // D = Differantiator. Kijkt niet naar de afwijking zelf, maar naar hoe snel
 									// deze groeit.
-	final float BASE_SPEED = 240;  //De snelheid van onze robot
+	final float BASE_SPEED = 150;  //De snelheid van onze robot
 	float leftSpeed, rightSpeed;
 	float sensorData;
 	float integral = 0;
@@ -54,8 +54,8 @@ public class PIDController {
 	}
 	
 	// Zet de Brick klaar, zodat we de display kunnen gebruiken
-	private Brick brick;
-	private TextLCD display;
+	//private Brick brick;
+	//private TextLCD display;
 	
 	// Lees met de sensor en krijg een kleurwaarde terug
 	// Sensor staat in red modus
@@ -65,12 +65,12 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 	if (log) {
-			display.clear();
-			display.drawString("Sensor: ", 0, 0);
-			display.drawInt((int)redsample[0], 0, 1);
+			//display.clear();
+			//display.drawString("Sensor: ", 0, 0);
+			//display.drawInt((int)redsample[0], 0, 1);
 			
-//			System.out.print("sensor: ");
-//			System.out.println(redsample[0]);
+			System.out.print("sensor: ");
+			System.out.println(redsample[0]);
 		}
 		return redsample[0];
 	}

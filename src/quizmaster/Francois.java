@@ -40,9 +40,10 @@ public class Francois {
 	
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		reacties.schudHoofd(1);
-		reacties.wiggle(1);
-		reacties.pirouette(1);
+		reacties.schudHoofd();
+		reacties.wiggle();
+		reacties.pirouette();
+		reacties.scared();
 		displayIntro();
 		eersteVraag();
 		
