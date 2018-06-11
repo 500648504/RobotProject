@@ -17,7 +17,7 @@ public class MuziekLezer {
 	private final int SCAN_SNELHEID = 6;
 	private final int MUZIEKVOLUME = 10;				//
 	private final int NOOT_LENGTE = 500;
-	private final int ZWART_CORR = 250;					// Als hij zwart leest speelt hij geen toon en scant snel teveel waarden. Een delay NOOT_LENGTE bleek teveel, vandaar een correctie
+	private final int ZWART_CORR = 220;					// Als hij zwart leest speelt hij geen toon en scant snel teveel waarden. Een delay NOOT_LENGTE bleek teveel, vandaar een correctie
 	private final int NOOT_D = 293;
 	private final int NOOT_E = 329;
 	private final int NOOT_F = 349;
