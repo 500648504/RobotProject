@@ -65,7 +65,7 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 	if (log) {
-			
+			display.clear();
 			display.drawString("Sensor: ", 0, 0);
 			display.drawInt((int)redsample[0], 0, 1);
 			
