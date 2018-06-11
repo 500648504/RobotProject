@@ -41,6 +41,8 @@ public class Francois {
 	// Start de Quizzzzz!
 	public void runQuiz() {
 		reacties.schudHoofd(2);
+		reacties.wiggle(2,200);
+		reacties.pirouette(2,200);
 		displayIntro();
 		eersteVraag();
 		
@@ -76,11 +78,9 @@ public class Francois {
 	// Intro voor quiz, Francois stelt zich voor.
 	public void displayIntro() {
 		display.clear();
-		display.drawString("Welkom! Ik ben uw", 0, 1);
-		display.drawString("Quizmaster!", 0, 2);
-		display.drawString("Ik heet Francois!", 0, 3);
-		display.drawString("F", 18, 8);
-		getSensorInput();
+		display.drawString("Welkom! Ik ben uw", 0, 0);
+		display.drawString("Quizmaster!", 0, 1);
+		display.drawString("Ik heet Francois!", 0, 2);
 	}
 	
 	
@@ -100,6 +100,7 @@ public class Francois {
 			nogEenKeer();
 		} else {
 			// launch methode met vraag over Jodi Bernal
+			fanJodiBernal();
 		}		
 	}
 	
@@ -115,12 +116,24 @@ public class Francois {
 		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
 		
 		if (keuze == ANTWOORD_LINKS) {
+			display.clear();
+			display.drawString("Lijn en muziek", 0, 0);
+			display.drawString("starten vanuit", 0, 1);
+			display.drawString("het menu", 0, 2);
+			dankjewelTotZiens();
 			// terug naar menu
 			
 		} else {
 			display.clear();
-			display.drawString("Vakantie!!!", 0, 1);
-			// launch methode met vraag over Jodi Bernal
+			display.drawString("Vakantie!!!", 0, 0);
+			display.drawString("Ik ga nu naar", 0, 1);
+			display.drawString("Jodi Bernal luis-", 0, 2);
+			display.drawString("teren!", 0, 3);
+			display.drawString("Wat is er?", 0, 5);
+			display.drawString("Wat kijk je raar?", 0, 6);
+			// launch methode met volgende vraag
+			Delay.msDelay(5000);
+			fanJodiBernal();
 		}
 	}
 	
@@ -136,15 +149,43 @@ public class Francois {
 		
 		if (keuze == ANTWOORD_LINKS) {
 			// launch methode was de lijn wel ok?
+			wasLijnWelGoed();
 			
 		} else {
 			display.clear();
-			display.drawString("Dankje, tot ziens!", 0, 1);
+			display.drawString("Dat is jammer!", 0, 0);
+			dankjewelTotZiens();
 			// terug naar het menu
 		}
 	}
 	
-	
+	//Vraag 3: Vraagt of het lijnvolgen wel goed was (reactie op geen
+	// fan zijn van Jodi Bernal).
+	public void wasLijnWelGoed() {
+		display.clear();
+		String vraagR1 = "Het lijnvolgen, ";
+		String vraagR2 = "was dat wel goed?";
+		String optie1 = "Dat ging prima!";
+		String optie2 = "Dat kon beter.";
+		
+		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		
+		if (keuze == ANTWOORD_LINKS) {
+			display.clear();
+			display.drawString("Mooi!", 0, 0);
+			dankjewelTotZiens();
+			// terug naar het menu
+		} else {
+			display.clear();
+			display.drawString("Jammer...", 0, 0);
+			display.drawString("Mijn programmeurs", 0, 1);
+			display.drawString("willen graag horen", 0, 2);
+			display.drawString("hoe het wel moest", 0, 3);
+			dankjewelTotZiens();
+			// terug naar het menu
+		}
+	}
+
 	
 	// Algemene stel vraag layout, de methodes met de vragen definieren de strings die ingevuld
 	// moeten worden in deze algemene methode.
@@ -159,6 +200,13 @@ public class Francois {
 		return getSensorInput();	
 	}
 	
-	
+	// Methode waarin dankjewel en tot ziens wordt weergegeven (afsluiting en terug naar menu)
+	public void dankjewelTotZiens() {
+		display.drawString("Dankjewel!", 0, 4);
+		display.drawString("Tot Ziens!", 0, 5);
+		display.drawString("U keert nu terug", 0, 6);
+		display.drawString("naar het menu.", 0, 7);
+		Delay.msDelay(5000);
+	}
 	
 }
