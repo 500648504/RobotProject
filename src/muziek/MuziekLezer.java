@@ -14,7 +14,7 @@ import lejos.utility.Delay;
 public class MuziekLezer {
 
 	private Brick brick;										// De robot wordt geactiveerd zodat teksten op het scherm van de robot geplaatst kunnen worden
-	private TextLCD display;									// De textLCD toont teksten op de robot.
+//	private TextLCD display;									// De textLCD toont teksten op de robot.
 	private final int LEESSNELHEID = 240;						// Dit is hoe snel de robot rijdt.
 	private ArrayList<Integer> sampleLijst = new ArrayList<>();   // Arraylist, deze wordt gevuld met de kleurwaardes die gescand worden.
 	private final int STOP_CONDITIE = 3;					// Dit is voor de for-loop, er worden 3 begin-waardes in de kleuren array gezet (zie regel 35)
@@ -73,33 +73,33 @@ public class MuziekLezer {
 				switch (currentSample) {				// Kiest op basis van de gescande kleur een switch.
 				case 0: 								// Rood geeft altijd het cijfer 0.
 					Sound.playTone(440, 500); 			// Frequentie & Duur, wij hebben hier dus zelf de toon A van gemaakt, namelijk frequentie 440 ingesteld.
-					display.clear();					// Het display wordt leeggemaakt, voordat de nieuwe tekst wordt getoond.
-					display.drawString("Rood", 0, 0); 	// Ter info laat de robot ook de gescande kleur zien, dit voor eventuele controles (gaat het scannen goed).
+//					display.clear();					// Het display wordt leeggemaakt, voordat de nieuwe tekst wordt getoond.
+//					display.drawString("Rood", 0, 0); 	// Ter info laat de robot ook de gescande kleur zien, dit voor eventuele controles (gaat het scannen goed).
 					break;								// Speelt 1x kleur af, daarna break.
 				case 1: // Groen (Toon D)
 					Sound.playTone(293, 500);
-					display.clear();
-					display.drawString("Groen", 0, 0); 
+//					display.clear();
+//					display.drawString("Groen", 0, 0); 
 					break; 
 				case 2: // Blauw (Toon E)
 					Sound.playTone(329, 500);
-					display.clear();
-					display.drawString("Blauw", 0, 0); 
+//					display.clear();
+//					display.drawString("Blauw", 0, 0); 
 					break;
 				case 3: // Geel (Toon F)
 					Sound.playTone(349, 500);
-					display.clear();
-					display.drawString("Geel", 0, 0); 
+//					display.clear();
+//					display.drawString("Geel", 0, 0); 
 					break;
 				case 6: // Wit (toon G)
 					Sound.playTone(391, 500);
-					display.clear();
-					display.drawString("Wit", 0, 0); 
+//					display.clear();
+//					display.drawString("Wit", 0, 0); 
 					break;
 				case 7: // Zwart (Geen toon)
-					display.clear();
-					display.drawString("Zwart", 0, 0); 
-					Delay.msDelay(320);
+//					display.clear();
+//					display.drawString("Zwart", 0, 0); 
+					Delay.msDelay(250);
 					break;
 				}
 			}
@@ -107,8 +107,8 @@ public class MuziekLezer {
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
 		Motor.A.stop(true);
 		Motor.D.stop(true);
-		display.clear();
-		display.drawString("sampleLijst", 0, 0); 	// De arraylist met gescande kleuren wordt getoond, dit is voor eventuele controles.
+//		display.clear();
+//		display.drawString("sampleLijst", 0, 0); 	// De arraylist met gescande kleuren wordt getoond, dit is voor eventuele controles.
 		return;
 	}
 
@@ -120,6 +120,8 @@ public class MuziekLezer {
 	}
 
 }
+
+
 
 
 
