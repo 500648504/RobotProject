@@ -40,9 +40,9 @@ public class Francois {
 	
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		reacties.schudHoofd(2);
-		reacties.wiggle(2,200);
-		reacties.pirouette(2,200);
+		//reacties.schudHoofd(2);
+		//reacties.wiggle(2,200);
+		//reacties.pirouette(2,200);
 		displayIntro();
 		eersteVraag();
 		
@@ -59,17 +59,14 @@ public class Francois {
 			linksTouch.fetchSample(antwoordLinks, 0);
 			rechtsTouch.fetchSample(antwoordRechts, 0);
 			// loop blijft lopen totdat 1 van de twee druk sensoren wordt ingedrukt.
-		} while (antwoordLinks[0] == 0 && antwoordRechts[0] == 0);
-
-		linksTouch.close();
-		rechtsTouch.close();
+		} while (antwoordLinks[0] == 0 && antwoordRechts[0] == 0);		
 		
 		// Uitlezen welke van de twee was ingedrukt en feedback op scherm weergeven.
 		if (antwoordLinks[0] == 1) {
-			display.drawString("Links ingedrukt", 0, 1);
+			Delay.msDelay(3000);
 			return ANTWOORD_LINKS;
 		} else {
-			display.drawString("Rechts ingedrukt", 0, 1);
+			Delay.msDelay(3000);
 			return ANTWOORD_RECHTS;
 		}
 	}
@@ -81,6 +78,7 @@ public class Francois {
 		display.drawString("Welkom! Ik ben uw", 0, 0);
 		display.drawString("Quizmaster!", 0, 1);
 		display.drawString("Ik heet Francois!", 0, 2);
+		Delay.msDelay(4000);
 	}
 	
 	
@@ -132,7 +130,7 @@ public class Francois {
 			display.drawString("Wat is er?", 0, 5);
 			display.drawString("Wat kijk je raar?", 0, 6);
 			// launch methode met volgende vraag
-			Delay.msDelay(5000);
+			Delay.msDelay(4000);
 			fanJodiBernal();
 		}
 	}
@@ -206,7 +204,10 @@ public class Francois {
 		display.drawString("Tot Ziens!", 0, 5);
 		display.drawString("U keert nu terug", 0, 6);
 		display.drawString("naar het menu.", 0, 7);
-		Delay.msDelay(5000);
+		linksTouch.close();
+		rechtsTouch.close();
+		Delay.msDelay(4000);
+		display.clear();
 	}
 	
 }
