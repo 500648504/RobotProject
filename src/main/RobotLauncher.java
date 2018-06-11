@@ -68,8 +68,8 @@ public class RobotLauncher {
 					PIDController pid = new PIDController(); 				
 					while (true) {
 						if (Button.ESCAPE.isDown()) {
-							Motor.B.stop();
-							Motor.C.stop();
+							Motor.A.stop();
+							Motor.D.stop();
 							showMenu(display);
 							break;
 						}

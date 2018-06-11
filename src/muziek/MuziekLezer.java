@@ -28,7 +28,7 @@ public class MuziekLezer {
 
 	public void leesMuziek() {
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-//		File groenGeluidObject = new File("test.wav"); // groen
+		// File groenGeluidObject = new File("test.wav"); // groen
 		Sound.setVolume(10);
 		Motor.A.setSpeed(LEESSNELHEID);
 		Motor.D.setSpeed(LEESSNELHEID);
@@ -36,112 +36,91 @@ public class MuziekLezer {
 		Motor.D.forward();
 		Motor.A.resetTachoCount();
 		Motor.D.resetTachoCount();
-//		Boolean Doorgaan = true;
-		
-		
-		boolean doorgaan = true;
-		
-		while (doorgaan) {
+
+		// boolean doorgaan = true;
+
+		while (doorgaanMuziek()) {
 			if (Button.ESCAPE.isDown()) {
 				Motor.A.stop();
 				Motor.D.stop();
-				break; 
+				break;
 			}
 			int currentSample = -1;
-			
 
-			if (Motor.A.getTachoCount() % 6   == 0) { // Als omwentelingen (modulo 150 =  0)
-//			De kleuren Scanner gaat aan.
-			currentSample = sensor.getColorID(); // Haalt gescande kleur op.
-			sampleLijst.add(currentSample); // Stopt gescande kleur sampleLijst Array
-			
-			
+			if (Motor.A.getTachoCount() % 6 == 0) { // Als omwentelingen (modulo 150 = 0)
+				// De kleuren Scanner gaat aan.
+				currentSample = sensor.getColorID(); // Haalt gescande kleur op.
+				sampleLijst.add(currentSample); // Stopt gescande kleur sampleLijst Array
+
 				switch (currentSample) {
 				case 0: // Rood (Toon A)
-						Sound.playTone(440, 500); // Frequentie & Duur
-						System.out.println("Rood");
-						break;
+					Sound.playTone(440, 500); // Frequentie & Duur
+					System.out.println("Rood");
+					break;
 				case 1: // Groen (Toon D)
-						 Sound.playTone(293, 500);
-//						Sound.playSample(groenGeluidObject, 400); // Bestandsnaam & Volume
-						System.out.println("Groen");
-						break; // Speelt 1x kleur af, daarna break.
+					Sound.playTone(293, 500);
+					// Sound.playSample(groenGeluidObject, 400); // Bestandsnaam & Volume
+					System.out.println("Groen");
+					break; // Speelt 1x kleur af, daarna break.
 				case 2: // Blauw (Toon E)
-						 Sound.playTone(329, 500); // Frequentie & Duur
-						System.out.println("Blauw");
-						break;
+					Sound.playTone(329, 500); // Frequentie & Duur
+					System.out.println("Blauw");
+					break;
 				case 3: // Geel (Toon F)
-						 Sound.playTone(349, 500);
-						System.out.println("Geel");
-						break;
+					Sound.playTone(349, 500);
+					System.out.println("Geel");
+					break;
 				case 6: // Wit (toon G)
-						Sound.playTone(391, 500);
-						System.out.println("wit");
-						break;
+					Sound.playTone(391, 500);
+					System.out.println("wit");
+					break;
 				case 7: // Zwart (Geen toon)
-						System.out.println("Zwart");
-						break;
+					System.out.println("Zwart");
+					break;
 				}
 			}
 		}
-		 sensor.close();
-		 Motor.A.stop(true);
-		 Motor.D.stop(true);
-		 return;
+		sensor.close();
+		Motor.A.stop(true);
+		Motor.D.stop(true);
+		return;
 	}
-	
-	
-//	public boolean doorgaanMuziek() {   // drie keer zwart is stop
-//		if (sampleLijst.get(0) == 7 && sampleLijst.get(1) == 7 && sampleLijst.get(2) == 7) {
-//			return false;
-//		}
-//		else 
-//			return true;
-//	}
-	
+
+	public boolean doorgaanMuziek() { // drie keer zwart is stop
+		if (sampleLijst.get(0) == 7 && sampleLijst.get(1) == 7 && sampleLijst.get(2) == 7) {
+			return false;
+		}
+		return true;
+	}
+
 }
 
+// RobotLauncher.showMenu();
 
+// int sampleteller = 0;
 
+// while ( sensor.getColorID() != 7 ) { // Stopt bij zwart (7)
 
+// if (vorigeKleur != huidigeKleur) {
+// vorigeKleur = huidigeKleur;
 
+// File groenGeluidObject = new File("test.wav");
+// Sound.playSample(groenGeluidObject, 200); // Bestandsnaam & Volume
+// Button.waitForAnyPress();
 
+// System.out.println(sensor.getColorID());
+// int huidigeKleur = sensor.getColorID();
 
-//RobotLauncher.showMenu();
+// while (Motor.B.getTachoCount() <= 4000) { // Aantal omwentelingen
 
+// boolean doorgaan = true;
+// int vorigeKleur = -1;
 
-//int sampleteller = 0;
-
-//while ( sensor.getColorID() != 7 ) { // Stopt bij zwart (7)
-
-//if (vorigeKleur != huidigeKleur) {
-//vorigeKleur = huidigeKleur;
-
-
-//File groenGeluidObject = new File("test.wav");
-//Sound.playSample(groenGeluidObject, 200); // Bestandsnaam & Volume
-//Button.waitForAnyPress();
-
-
-
-
-
-//System.out.println(sensor.getColorID());
-//int huidigeKleur = sensor.getColorID();
-
-
-//while (Motor.B.getTachoCount() <= 4000) { // Aantal omwentelingen
-
-//boolean doorgaan = true;
-//int vorigeKleur	= -1;
-
-
-//sensor.getRedMode();
+// sensor.getRedMode();
 // int sampleSize = sensor.sampleSize();
 // int sampleSize = 3; //niet netjes, misschien later nog veranderen? 3 voor RGB
 // - samplesize opvragen?
 // float[] sample = new float[sampleSize];
-
 
 // Motor.B.resetTachoCount();
 // Motor.C.resetTachoCount();
@@ -156,7 +135,8 @@ public class MuziekLezer {
 // int sampleteller = 0;
 
 // while (Motor.B.getTachoCount() <= 1000) { // Aantal omwentelingen
-// if (Motor.B.getTachoCount() % 150 == 0) { // Als omwentelingen (modulo 150 =  0) / Kleuren Scannen:
+// if (Motor.B.getTachoCount() % 150 == 0) { // Als omwentelingen (modulo 150 =
+// 0) / Kleuren Scannen:
 
 // De kleuren Scanner gaat aan.
 // Deze scant continue kleuren.
