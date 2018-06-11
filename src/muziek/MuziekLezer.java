@@ -44,7 +44,7 @@ public class MuziekLezer {
 	public void leesMuziek() {
 		for (int vul = 0 ; vul < STOP_CONDITIE ; vul++) {
 		sampleLijst.add(vul, DEFAULT_SAMPLE); 		// hier wordt de array gevuld met fictieve waarde, zodat de array uitgelezen kan worden.	
-		}											// Bij 3x zwart (is nummer 7) stopt de robot met rijden, regel 49)
+		}											// Bij 3x zwart (is nummer 7) stopt de robot met rijden)
 		
 		
 		EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);		// Het object scanner wordt aangemaakt, de scanner kan nu gebruikt worden.
@@ -57,7 +57,7 @@ public class MuziekLezer {
 		Motor.D.resetTachoCount();
 
 
-		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door, zie regel 107.
+		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door.
 			if (Button.ESCAPE.isDown()) {								// Bij escape indrukken: stoppen motoren
 //				Motor.A.stop();											
 //				Motor.D.stop();
