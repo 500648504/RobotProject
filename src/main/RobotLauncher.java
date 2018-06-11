@@ -80,7 +80,7 @@ public class RobotLauncher {
 				case 2:
 					display.drawString("Start Muziek Speler", 0, 8);
 					MuziekLezer MuziekReader = new MuziekLezer();
-					MuziekReader.testRun();
+					MuziekReader.leesMuziek();
 					showMenu(display);
 					break;
 				case (3):
