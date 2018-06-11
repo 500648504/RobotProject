@@ -12,7 +12,7 @@ import lejos.hardware.sensor.EV3ColorSensor;
 public class MuziekLezer {
 
 	private Brick brick;
-	private final int LEESSNELHEID = 244;
+	private final int LEESSNELHEID = 240;
 	private ArrayList<Integer> sampleLijst = new ArrayList<>();
 
 	public MuziekLezer() {
