@@ -2,6 +2,8 @@ package quizmaster;
 
 import lejos.hardware.Brick;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.port.SensorPort;
+import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
 import quizmaster.FysiekeReacties;
 import quizmaster.Francois;
@@ -16,7 +18,7 @@ import quizmaster.Francois;
  */
 
 
-public class DierenQuiz extends Francois {
+public class DierenQuiz {
 
 	// Variabelen
 	private int[] antwoorden;
@@ -25,14 +27,17 @@ public class DierenQuiz extends Francois {
 	private int vraagnummer;
 	private int keuze;
 	private int totaalScore = 0;
+	public final static int ANTWOORD_LINKS = 1;
+	public final static int ANTWOORD_RECHTS = 2;
+	private TouchSensor sensor = new TouchSensor();
+	private Vraag vraag = new Vraag();
 
 	// constructor
-	public DierenQuiz(Brick brick) {
-		super(brick);
-		this.display = brick.getTextLCD();
+	public DierenQuiz() {
 		antwoorden = new int[MAX_AANTAL_VRAGEN];
 	}
-
+	
+	
 	// Vraag 1
 	public void vraag1() {
 		display.clear();
@@ -41,7 +46,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "met hun tong";
 		String optie2 = "met hun poten";
 		vraagnummer = 1;
-		keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		vraag2();
 	}
@@ -54,7 +59,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "bouvier";
 		String optie2 = "chow chow";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsFout();
 		vraag3();
 	}
@@ -67,7 +72,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "een kodiakbeer";
 		String optie2 = "een koala";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsFout();
 		vraag4();
 	}
@@ -80,7 +85,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "10";
 		String optie2 = "8";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		vraag5();
 	}
@@ -93,7 +98,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "duif";
 		String optie2 = "kip";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsFout();
 		vraag6();
 	}
@@ -106,7 +111,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "2";
 		String optie2 = "3";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		vraag7();
 	}
@@ -119,7 +124,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "zwart";
 		String optie2 = "wit";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		vraag8();
 	}
@@ -132,7 +137,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "een roedel";
 		String optie2 = "een clan";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsFout();
 		vraag9();
 	}
@@ -145,7 +150,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "vliegend hert";
 		String optie2 = "meikever";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		vraag10();
 	}
@@ -158,7 +163,7 @@ public class DierenQuiz extends Francois {
 		String optie1 = "stokstaartje";
 		String optie2 = "naakte molrat";
 		vraagnummer++;
-		int keuze = super.stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		linksIsGoed();
 		berekenTotaalScore();
 		weergevenResultaat();

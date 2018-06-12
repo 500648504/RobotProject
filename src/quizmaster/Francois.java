@@ -13,7 +13,8 @@ import quizmaster.DierenQuiz;
  * Deze Class is de class die de hoofd functionaliteit voor de interactieve quiz bevat.
  * Quizmaster Francois vraagt de gebruiker van alles en geeft per vraag twee opties
  * als antwoord. De gebruiker geeft antwoord door op 1 van de 2 druksensoren van de 
- * robot te drukken. Eerst is er een aantal vragen over wat de robot hiervoor heeft
+ * robot te drukken. De sensoren hebben hun functionaliteit in de Class TouchSensor.
+ * Eerst is er een aantal vragen over wat de robot hiervoor heeft
  * laten zien (lijn volgen en muziek maken). Afhankelijk van het antwoord dat de gebruiker geeft, 
  * wordt een andere vraag als volgende vraag gesteld. 
  * Na het stukje terugkijken, start de uiteindelijke quiz met vragen over dieren.
@@ -25,14 +26,22 @@ import quizmaster.DierenQuiz;
 public class Francois {
 
 	//Variabelen
-	public final static int ANTWOORD_LINKS = 1;
-	public final static int ANTWOORD_RECHTS = 2;
-	EV3TouchSensor linksTouch = new EV3TouchSensor(SensorPort.S1);
-	EV3TouchSensor rechtsTouch = new EV3TouchSensor(SensorPort.S4);
 	private Brick brick;
 	private TextLCD display;
+	public final static int ANTWOORD_LINKS = 1;
+	private TouchSensor sensor = new TouchSensor();
+	private Vraag vraag;
 	private FysiekeReacties reacties = new FysiekeReacties();
-	private DierenQuiz dierenquiz = new DierenQuiz(brick);
+	private DierenQuiz dierenquiz = new DierenQuiz();
+	private final int TIJD_VOOR_SCHERM_LEZEN = 3500;
+	// deze tijd is in ms en geeft de gebruiker tijd om het scherm te lezen
+	// voordat het gewist wordt voor meer tekst.
+	
+	// Het LeJos EV3 LCD scherm heeft 8 regels. De bovenste regel is regel 0,
+	// de onderste regel 7 (y coordinaat). De x-coordinaat geeft de posities op
+	// de regel weer, positie 0 (geheel links) tot en met 17 (geheel rechts).
+	private final int LCD_LINKS_UITGELIJND = 0;
+	
 	
 	
 	// Constructor voor quizmaster Francois
@@ -41,39 +50,16 @@ public class Francois {
 		this.display = brick.getTextLCD();
 	}
 	
-	
+		
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		reacties.schudHoofd();
-		reacties.wiggle();
-		reacties.pirouette();
-		reacties.scared();
+		//reacties.schudHoofd();
+		//reacties.wiggle();
+		//reacties.pirouette();
+		//reacties.scared();
 		displayIntro();
 		eersteVraag();
 		
-	}
-	
-	//links 1 en rechts 4 als je voor de robot zit
-	// Ontvangen en verwerken van antwoord keuzes via de druksensoren
-	// op poorten S1 (links) en S4 (rechts). 
-	public int getSensorInput() {
-		float[] antwoordLinks = new float[linksTouch.sampleSize()];
-		float[] antwoordRechts = new float[rechtsTouch.sampleSize()];
-
-		do {
-			linksTouch.fetchSample(antwoordLinks, 0);
-			rechtsTouch.fetchSample(antwoordRechts, 0);
-			// loop blijft lopen totdat 1 van de twee druk sensoren wordt ingedrukt.
-		} while (antwoordLinks[0] == 0 && antwoordRechts[0] == 0);		
-		
-		// Uitlezen welke van de twee was ingedrukt en feedback op scherm weergeven.
-		if (antwoordLinks[0] == 1) {
-			Delay.msDelay(3000);
-			return ANTWOORD_LINKS;
-		} else {
-			Delay.msDelay(3000);
-			return ANTWOORD_RECHTS;
-		}
 	}
 	
 	
@@ -83,7 +69,7 @@ public class Francois {
 		display.drawString("Welkom! Ik ben uw", 0, 0);
 		display.drawString("Quizmaster!", 0, 1);
 		display.drawString("Ik heet Francois!", 0, 2);
-		Delay.msDelay(4000);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 	}
 	
 	
@@ -96,7 +82,7 @@ public class Francois {
 		String optie1 = "Geweldig!";
 		String optie2 = "Mwoah";
 		
-		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		
 		if (keuze == ANTWOORD_LINKS) {
 			// launch methode met vraag om alles nog eens te laten zien (alles = lijn volgen en muziek)
@@ -115,9 +101,9 @@ public class Francois {
 		String vraagR2 = "eens laten zien?";
 		String optie1 = "Que Si!!";
 		String optie2 = "Que No!";
-		
-		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
-		
+
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
+
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
 			display.drawString("Lijn en muziek", 0, 0);
@@ -125,7 +111,7 @@ public class Francois {
 			display.drawString("het menu", 0, 2);
 			dankjewelTotZiens();
 			// terug naar menu
-			
+
 		} else {
 			display.clear();
 			display.drawString("Vakantie!!!", 0, 0);
@@ -135,7 +121,7 @@ public class Francois {
 			display.drawString("Wat is er?", 0, 5);
 			display.drawString("Wat kijk je raar?", 0, 6);
 			// launch methode met volgende vraag
-			Delay.msDelay(4000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 			fanJodiBernal();
 		}
 	}
@@ -148,7 +134,7 @@ public class Francois {
 		String optie1 = "Natuurlijk niet!";
 		String optie2 = "Zeg ik niet!";
 		
-		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		
 		if (keuze == ANTWOORD_LINKS) {
 			// launch methode was de lijn wel ok?
@@ -171,7 +157,7 @@ public class Francois {
 		String optie1 = "Dat ging prima!";
 		String optie2 = "Dat kon beter.";
 		
-		int keuze = stelVraag(vraagR1, vraagR2, optie1, optie2);
+		int keuze = vraag.stelVraag(vraagR1, vraagR2, optie1, optie2);
 		
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
@@ -184,25 +170,12 @@ public class Francois {
 			display.drawString("Mijn programmeurs", 0, 1);
 			display.drawString("willen graag horen", 0, 2);
 			display.drawString("hoe het wel moest", 0, 3);
-			Delay.msDelay(3000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 			startQuiz();
 			// naar de daadwerkelijke quiz
 		}
 	}
 
-	
-	// Algemene stel vraag layout, de methodes met de vragen definieren de strings die ingevuld
-	// moeten worden in deze algemene methode.
-	public int stelVraag(String vraagR1, String vraagR2, String optie1, String optie2) {
-		display.clear();
-		display.drawString(vraagR1, 0, 0);
-		display.drawString(vraagR2,  0, 1);
-		display.drawString(optie1, 0, 4);
-		display.drawString(optie2, (18 - optie2.length()), 5);
-		display.drawString("(L)", 0, 7);
-		display.drawString("(R)", 16, 7);
-		return getSensorInput();	
-	}
 	
 	// De daadwerkelijke start van de quiz, na het kort evalueren van de lijn en muziek functies
 	public void startQuiz() {
@@ -211,12 +184,13 @@ public class Francois {
 		display.drawString("korte evaluatie", 0, 1);
 		display.drawString("Maar nu de echte", 0, 3);
 		display.drawString("quizzzz!", 0, 4);
-		Delay.msDelay(3000);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		display.clear();
 		display.drawString("Je kan 10 punten", 0, 0);
 		display.drawString("verdienen", 0, 1);
 		display.drawString("1 punt per vraag", 0, 2);
 		display.drawString("Op naar vraag 1", 0, 3);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		quizVragen();
 	}
 	
@@ -233,9 +207,8 @@ public class Francois {
 		display.drawString("Tot Ziens!", 0, 5);
 		display.drawString("U keert nu terug", 0, 6);
 		display.drawString("naar het menu.", 0, 7);
-		linksTouch.close();
-		rechtsTouch.close();
-		Delay.msDelay(4000);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
+		sensor.closeSensors();
 		display.clear();
 	}
 	
