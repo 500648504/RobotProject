@@ -37,7 +37,14 @@ public class PIDController {
 	private float lastErr = 0; 				// De gemeten afwijking, de laatste gemeten en opgeslagen error
 	private float deriv = 0; 				// De variable voor het opslaan van het verschil tussen de afwijking en de
 											// laatst gemeten afwijking
-
+	private TextLCD display;
+	
+	public PIDController (Brick brick) {
+		this.display = brick.getTextLCD();
+		display.clear();
+	}
+	
+	
 	public void run() {
 		// De sensor meet een waarde
 		sensorData = pollSensor(true);
@@ -63,9 +70,9 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 		if (log) {
-
-			System.out.print("sensor: ");
-			System.out.println(redsample[0]);
+			String displayString = "Sensor: " + redsample[0];
+			display.drawString(displayString, 0, 0);
+			display.scroll();
 		}
 		return redsample[0];
 	}

@@ -36,27 +36,17 @@ public class MuziekLezer {
 		Sound.setVolume(MUZIEKVOLUME);											// Het geluid wordt op volume 10 gezet
 		Motor.A.setSpeed(LEESSNELHEID);									// Snelheid wordt geactiveerd
 		Motor.D.setSpeed(LEESSNELHEID);
-<<<<<<< HEAD
 
 		display.clear();
-=======
->>>>>>> 1a4611fe0d732b5027c9d24e246ce6d220c4127b
-		
+	
 		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door.
 
 			if (Button.ESCAPE.isDown()) {								// Bij escape indrukken: stoppen motoren
 				break;
 			}
 			
-<<<<<<< HEAD
-			Motor.A.rotate(120, true);
-			Motor.D.rotate(120, true);
-			
-=======
 			Motor.A.rotate(120, true);									//Motor draait elke keer 120 graden van een hele omwenteling (360)
 			Motor.D.rotate(120, true);									//en activeert de sensor (en evt neutron cannon)
-
->>>>>>> 1a4611fe0d732b5027c9d24e246ce6d220c4127b
 				currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
 				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
 				
@@ -66,11 +56,8 @@ public class MuziekLezer {
 			}
 		
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
-<<<<<<< HEAD
-				
-=======
 	
->>>>>>> 1a4611fe0d732b5027c9d24e246ce6d220c4127b
+
 		return;
 	}
 	
@@ -90,6 +77,7 @@ public class MuziekLezer {
 		display.drawString("Ta da!", 7, 5);
 		display.drawString("druk op een toets", 0, 1);		
 	}
+
 
 	public boolean doorgaanMuziek() { // drie keer zwart is stop
 		if (sampleLijst.size() < 3) { // eerst controleren of er wel 3 zijn
