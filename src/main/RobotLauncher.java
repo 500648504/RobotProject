@@ -59,22 +59,14 @@ public class RobotLauncher {
 			if(Button.LEFT.isDown())  selection = 1;
 			if(Button.ENTER.isDown()) selection = 2;
 			if(Button.RIGHT.isDown()) selection = 3;
-			if(Button.ESCAPE.isDown()) selection = 4;
+			if(Button.UP.isDown()) selection = 4;
 
 
 			switch (selection) {
 				case 1:
 					display.drawString("Start Lijn Volgen", 0, 7);
 					PIDController pid = new PIDController(brick); 				
-					while (true) {
-						if (Button.ESCAPE.isDown()) {
-							Motor.A.stop();
-							Motor.D.stop();
-							break;
-						}
-
-						pid.run(); 
-					} 
+					pid.startPID();					
 					showMenu(display);
 					break; 
 				case 2:
@@ -96,7 +88,6 @@ public class RobotLauncher {
 				case (4):
 					menuLoop=false;
 					break;
-					
 					}
 		}
 		

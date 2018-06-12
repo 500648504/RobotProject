@@ -51,7 +51,7 @@ public class MuziekLezer {
 				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
 				
 				display.scroll();						//speelt de goede toon en laat hem op scherm zien
-				display.drawString(NOOT_NAAMKLEUR[currentSample], 0, 3);
+				display.drawString(NOOT_NAAMKLEUR[currentSample], 0, 0);
 				Sound.playTone(NOOT_FREQ[currentSample], NOOT_LENGTE_LEES);
 			}
 		
@@ -70,8 +70,8 @@ public class MuziekLezer {
 		
 		for (int index = 0 ; index < sampleLijst.size() ; index ++) {
 			display.scroll();						//speelt de goede toon en laat hem op scherm zien
-			display.drawString(NOOT_NAAMKLEUR[currentSample], 0, 3);
-			Sound.playTone(NOOT_FREQ[currentSample], NOOT_LENGTE_SPEEL);	
+			display.drawString(NOOT_NAAMKLEUR[index], 0, 0);
+			Sound.playTone(NOOT_FREQ[index], NOOT_LENGTE_SPEEL);	
 		}
 		
 		display.drawString("Ta da!", 7, 5);

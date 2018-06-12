@@ -1,7 +1,9 @@
 package lijnvolgen;
 
 import lejos.hardware.Brick;
+import lejos.hardware.Button;
 import lejos.hardware.lcd.TextLCD;
+import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
@@ -38,10 +40,25 @@ public class PIDController {
 	private float deriv = 0; 				// De variable voor het opslaan van het verschil tussen de afwijking en de
 											// laatst gemeten afwijking
 	private TextLCD display;
+	private boolean runCheck;
+	
 	
 	public PIDController (Brick brick) {
 		this.display = brick.getTextLCD();
 		display.clear();
+	}
+	
+	public void startPID() {
+		runCheck = true;
+		while (runCheck) {
+			if (Button.ESCAPE.isDown()) {
+				Motor.A.stop();
+				Motor.D.stop();
+				sensor.close();
+				runCheck = false;
+			}
+			run(); 
+		}
 	}
 	
 	
@@ -70,7 +87,8 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 		if (log) {
-			String displayString = "Sensor: " + redsample[0];
+			
+			String displayString = "Sensor: " + Float.toString(redsample[0]);
 			display.drawString(displayString, 0, 0);
 			display.scroll();
 		}
