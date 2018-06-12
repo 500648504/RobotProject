@@ -65,10 +65,18 @@ public class RobotLauncher {
 			switch (selection) {
 				case 1:
 					display.drawString("Start Lijn Volgen", 0, 7);
-					PIDController pid = new PIDController(brick); 				
-					pid.startPID();					
-					showMenu(display);
-					break; 
+					PIDController pid = new PIDController(); 		
+					while (true) {
+						if (Button.ESCAPE.isDown()) {
+							Motor.A.stop();
+							Motor.D.stop();
+							showMenu(display);
+							break;
+						}
+					pid.run();
+					}
+										
+					break;
 				case 2:
 					display.drawString("Start Muziek", 0, 7);
 					MuziekLezer MuziekReader = new MuziekLezer(brick);

@@ -67,8 +67,6 @@ public class MuziekLezer {
 				Sound.playTone(NOOT_FREQ[currentSample], NOOT_LENGTE_LEES);
 			}
 		
-		Motor.A.close();
-		Motor.D.close();
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
 	
 

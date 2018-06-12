@@ -1,9 +1,7 @@
 package lijnvolgen;
 
 import lejos.hardware.Brick;
-import lejos.hardware.Button;
 import lejos.hardware.lcd.TextLCD;
-import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
@@ -19,7 +17,6 @@ import lejos.utility.Delay;
  *         die genomen wordt, wordt in beeld getoond zodat er bij afwijkingen
  *         makkelijker mee kan worden gewerkt.
  */
-
 public class PIDController {
 
 	// Variabelen
@@ -38,31 +35,7 @@ public class PIDController {
 											// gegeven grootheid
 	private float lastErr = 0; 				// De gemeten afwijking, de laatste gemeten en opgeslagen error
 	private float deriv = 0; 				// De variable voor het opslaan van het verschil tussen de afwijking en de
-											// laatst gemeten afwijking
-	private TextLCD display;
-	private boolean runCheck;
-	
-	
-	public PIDController (Brick brick) {
-		this.display = brick.getTextLCD();
-		display.clear();
-	}
-	
-	public void startPID() {
-		runCheck = true;
-		while (runCheck) {
-			if (Button.ESCAPE.isDown()) {
-				Motor.A.stop();
-				Motor.D.stop();
-				Motor.A.close();
-				Motor.D.close();
-				sensor.close();
-				runCheck = false;
-			}
-			run(); 
-		}
-	}
-	
+											// laatst gemeten afwijking	
 	
 	public void run() {
 		// De sensor meet een waarde
@@ -72,7 +45,7 @@ public class PIDController {
 		// onderstaande berekening bijgestuurd naar de motoren. Links gaat minder snel rijden, rechts sneller.
 		float err = TARGET - sensorData;
 		integral += err;
-		integral *= 0.98;
+		integral *= 0.98;		
 		deriv = err - lastErr;
 		lastErr = err;
 
@@ -90,11 +63,12 @@ public class PIDController {
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 		if (log) {
+		
+			System.out.print("sensor: ");
+			System.out.println(redsample[0]);
 			
-			String displayString = "Sensor: ";
-			display.drawString(displayString, 0, 6);
-			display.scroll();
 		}
+		
 		return redsample[0];
 	}
 }
