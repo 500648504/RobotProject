@@ -38,22 +38,15 @@ public class MuziekLezer {
 		Sound.setVolume(MUZIEKVOLUME);											// Het geluid wordt op volume 10 gezet
 		Motor.A.setSpeed(LEESSNELHEID);									// Snelheid wordt geactiveerd
 		Motor.D.setSpeed(LEESSNELHEID);
-		//Motor.A.forward();												// De motoren gaan voorwaarts 
-		//Motor.D.forward();
-		//Motor.A.resetTachoCount();										// Het aantal omwentelingen wordt gereset, start op 0.
-		//Motor.D.resetTachoCount();
-
-
+		
 		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door.
 			if (Button.ESCAPE.isDown()) {								// Bij escape indrukken: stoppen motoren
-//				Motor.A.stop();											
-//				Motor.D.stop();
 				break;
 			}
-			Motor.A.rotate(120, true);
-			Motor.D.rotate(120, true);
-			//if (Motor.A.getTachoCount() % SCAN_SNELHEID == 0) { 	// Al de modulo van het aantal omwentelingen uitkomt op 0, dan: nieuwe scan. (modulo 6 = 0)
-				// De kleuren Scanner gaat aan.
+			
+			Motor.A.rotate(120, true);									//Motor draait elke keer 120 graden van een hele omwenteling (360)
+			Motor.D.rotate(120, true);									//en activeert de sensor (en evt neutron cannon)
+
 				currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
 				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
 				
@@ -82,9 +75,7 @@ public class MuziekLezer {
 			}
 		//}
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
-//		Motor.A.stop(true);
-//		Motor.D.stop(true);
-//	
+	
 		return;
 	}
 
