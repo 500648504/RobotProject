@@ -13,11 +13,11 @@ import lejos.utility.Delay;
 
 public class MuziekLezer {
 							
-	private final int LEESSNELHEID = 240;				// Dit is hoe snel de robot rijdt.
+	private final int LEESSNELHEID = 300;				// Dit is hoe snel de robot rijdt.
 	private final int SCAN_SNELHEID = 6;
 	private final int MUZIEKVOLUME = 10;				//
-	private final int NOOT_LENGTE = 500;
-	private final int ZWART_CORR = 220;					// Als hij zwart leest speelt hij geen toon en scant snel teveel waarden. Een delay NOOT_LENGTE bleek teveel, vandaar een correctie
+	private final int NOOT_LENGTE = 400;
+	private final int ZWART_CORR = 0;					// Als hij zwart leest speelt hij geen toon en scant snel teveel waarden. Een delay NOOT_LENGTE bleek teveel, vandaar een correctie
 	private final int NOOT_D = 293;
 	private final int NOOT_E = 329;
 	private final int NOOT_F = 349;
@@ -38,8 +38,8 @@ public class MuziekLezer {
 		Sound.setVolume(MUZIEKVOLUME);											// Het geluid wordt op volume 10 gezet
 		Motor.A.setSpeed(LEESSNELHEID);									// Snelheid wordt geactiveerd
 		Motor.D.setSpeed(LEESSNELHEID);
-		Motor.A.forward();												// De motoren gaan voorwaarts 
-		Motor.D.forward();
+		//Motor.A.forward();												// De motoren gaan voorwaarts 
+		//Motor.D.forward();
 		Motor.A.resetTachoCount();										// Het aantal omwentelingen wordt gereset, start op 0.
 		Motor.D.resetTachoCount();
 
@@ -50,8 +50,9 @@ public class MuziekLezer {
 //				Motor.D.stop();
 				break;
 			}
-
-			if (Motor.A.getTachoCount() % SCAN_SNELHEID == 0) { 	// Al de modulo van het aantal omwentelingen uitkomt op 0, dan: nieuwe scan. (modulo 6 = 0)
+			Motor.A.rotate(120, true);
+			Motor.D.rotate(120, true);
+			//if (Motor.A.getTachoCount() % SCAN_SNELHEID == 0) { 	// Al de modulo van het aantal omwentelingen uitkomt op 0, dan: nieuwe scan. (modulo 6 = 0)
 				// De kleuren Scanner gaat aan.
 				currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
 				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
@@ -77,8 +78,9 @@ public class MuziekLezer {
 					Delay.msDelay(NOOT_LENGTE - ZWART_CORR);
 					break;
 				}
+			Delay.msDelay(0);
 			}
-		}
+		//}
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
 		Motor.A.stop(true);
 		Motor.D.stop(true);
