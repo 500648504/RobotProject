@@ -64,30 +64,31 @@ public class RobotLauncher {
 
 			switch (selection) {
 				case 1:
-					display.drawString("Start Lijn Volgen", 0, 8);
-					PIDController pid = new PIDController(); 				
+					display.drawString("Start Lijn Volgen", 0, 7);
+					PIDController pid = new PIDController(brick); 				
 					while (true) {
 						if (Button.ESCAPE.isDown()) {
 							Motor.A.stop();
 							Motor.D.stop();
-							showMenu(display);
 							break;
 						}
 
 						pid.run(); 
 					} 
+					showMenu(display);
 					break; 
 				case 2:
-					display.drawString("Start Muziek Speler", 0, 8);
-					MuziekLezer MuziekReader = new MuziekLezer();
+					display.drawString("Start Muziek Speler", 0, 7);
+					MuziekLezer MuziekReader = new MuziekLezer(brick);
 					MuziekReader.leesMuziek();
+					MuziekReader.speelMuziek();
 					showMenu(display);
 					break;
 				case (3):
 					//System.out.println ("\nStart Maze Runner");
 					//Mazerunner Mazerunner = new Mazerunner();	
 					//Mazerunner.runMaze();
-					display.drawString("Start de Quiz", 0, 8);
+					display.drawString("Start de Quiz", 0, 7);
 					Francois boulanger = new Francois(brick);
 					boulanger.runQuiz();
 					showMenu(display);
@@ -99,7 +100,7 @@ public class RobotLauncher {
 					}
 		}
 		
-		display.drawString("Gestopt", 0, 8);
+		display.drawString("Gestopt", 0, 7);
 		
 	}
 	public static void showMenu(TextLCD display) {
