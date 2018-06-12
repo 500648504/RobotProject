@@ -9,6 +9,7 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
+import lejos.utility.Delay;
 
 public class MuziekLezer {
 							
@@ -40,17 +41,28 @@ public class MuziekLezer {
 		display.clear();
 	
 		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door.
-
+		
+			
 			if (Button.ESCAPE.isDown()) {								// Bij escape indrukken: stoppen motoren
 				break;
 			}
 			
 			Motor.A.rotate(120, true);									//Motor draait elke keer 120 graden van een hele omwenteling (360)
 			Motor.D.rotate(120, true);									//en activeert de sensor (en evt neutron cannon)
-				currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
+			
+			currentSample = sensor.getColorID(); 	// Haalt gescande kleur op.
+				
+				if (currentSample == -1) {				//onze zwart was op het eind van de week niet zwart genoeg meer,
+					currentSample = KLEUR_ZWART ;		//en werd vaak gemeten als -1, wat het programma stopte omdat hij dan
+				}										//index -1 leest. Daarom zetten we -1 terug naar zwart.
+				
+				
 				sampleLijst.add(0, currentSample); 		// Stopt gescande kleur sampleLijst Array
 				
+				
+				
 				display.scroll();						//speelt de goede toon en laat hem op scherm zien
+				
 				display.drawString(NOOT_NAAMKLEUR[currentSample], 0, 0);
 				Sound.playTone(NOOT_FREQ[currentSample], NOOT_LENGTE_LEES);
 			}
@@ -68,6 +80,7 @@ public class MuziekLezer {
 		display.drawString("Nog een keer!", 2, 0);
 		display.drawString("druk op een toets", 0 , 1);
 		Button.waitForAnyPress();
+		display.clear();
 		display.drawString("Speelt af...", 1, 3);
 		int currentTone;
 		String currentString;
@@ -80,9 +93,12 @@ public class MuziekLezer {
 			
 			Sound.playTone(currentTone, NOOT_LENGTE_SPEEL);	
 		}
+		display.clear();
 		display.drawString("Ta da!", 7, 5);
 		display.drawString("druk op een toets", 0, 1);
+		Delay.msDelay(1000);
 		Button.waitForAnyPress();
+		Delay.msDelay(2000);
 	}
 
 

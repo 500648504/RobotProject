@@ -38,9 +38,9 @@ public class RobotLauncher {
 		RobotLauncher deRijdendeRobot = new RobotLauncher();			// Aanmaken object
 		deRijdendeRobot.startMenu();									// Openen menu
 		
-		System.out.println("gestopt");
-		Delay.msDelay(3000);
-		
+		System.out.println("======gestopt");
+		Delay.msDelay(2000);
+		System.exit(0);
 		}
 	
 	
@@ -95,6 +95,7 @@ public class RobotLauncher {
 	
 	
 	public static void showMenu(TextLCD display) {
+		display.clear();
 		display.drawString("Kies programma:", 0, 1);
 		display.drawString("Links:  Lijn", 0, 2);
 		display.drawString("Midden: Muziek", 0, 3);
