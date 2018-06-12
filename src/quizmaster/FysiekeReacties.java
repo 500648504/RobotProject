@@ -1,9 +1,7 @@
 package quizmaster;
 
-import lejos.hardware.Button;
 import lejos.hardware.motor.Motor;
-import lejos.robotics.RegulatedMotor;
-import lejos.utility.Delay;
+
 
 /**
  * @author jvren

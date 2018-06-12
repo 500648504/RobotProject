@@ -1,8 +1,6 @@
 package quizmaster;
 
 import lejos.hardware.lcd.TextLCD;
-import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
 import quizmaster.TouchSensor;
 
@@ -11,7 +9,7 @@ import quizmaster.TouchSensor;
  * het LCD schermpje van de LeJos EV3 weer te geven. Het zelfde geldt voor de
  * afsluitende boodschap. Daarom is deze functionaliteit 
  * verhuisd naar deze Class.
- *
+ * @author Ilona
  */
 
 public class Vraag {
@@ -37,6 +35,8 @@ public class Vraag {
 	// Constructor
 	public Vraag(TextLCD display) {
 		this.display = display;
+		// het display is al nieuw aangemaakt in Francois en wordt meegegeven bij het 
+		// aanroepen van de constructor
 	}
 		
 	

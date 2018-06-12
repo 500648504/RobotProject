@@ -13,6 +13,7 @@ import quizmaster.Vraag;
  * Na het beantwoorden van een vraag, krijg je feedback of het goed of fout was.
  * Aan het einde wordt je totaalscore berekend en weergeven, waarna je terugkeert
  * naar het menu.
+ * @author Ilona
  */
 
 
@@ -21,6 +22,7 @@ public class DierenQuiz {
 	// Variabelen
 	private int[] antwoorden;
 	private final int MAX_AANTAL_VRAGEN = 10;
+	private final int TIJD_VOOR_SCHERM_LEZEN = 3000;
 	private TextLCD display;
 	private int vraagnummer;
 	private int keuze;
@@ -28,11 +30,15 @@ public class DierenQuiz {
 	public final static int ANTWOORD_LINKS = 1;
 	public final static int ANTWOORD_RECHTS = 2;
 	private Vraag vraag;
+	private FysiekeReacties reacties;
 
 	// constructor
-	public DierenQuiz(Vraag vraag, TextLCD display) {
+	public DierenQuiz(Vraag vraag, TextLCD display, FysiekeReacties reacties) {
 		this.vraag = vraag;
 		this.display = display;
+		this.reacties = reacties;
+		// het display, de vraag en de reacties zijn al nieuw aangemaakt in Francois en 
+		// worden meegegeven vanuit Francois bij het aanroepen van de constructor
 		antwoorden = new int[MAX_AANTAL_VRAGEN];
 	}
 	
@@ -190,7 +196,8 @@ public class DierenQuiz {
 		display.drawString("Gefeliciteerd!", 0, 3);
 		display.drawString("Dit is het einde", 0, 5);
 		display.drawString("van de quiz!", 0, 6);
-		Delay.msDelay(3000);
+		reacties.pirouette();
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		display.clear();
 	}
 
@@ -209,12 +216,12 @@ public class DierenQuiz {
 			wisRegels();
 			display.drawString("Dat is goed", 0, 7);
 			antwoorden[vraagnummer - 1] = 1;
-			Delay.msDelay(3000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
 			display.drawString("Dat is fout", 0, 7);
 			antwoorden[vraagnummer - 1] = 0;
-			Delay.msDelay(3000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		}
 	}
 
@@ -224,12 +231,12 @@ public class DierenQuiz {
 			wisRegels();
 			display.drawString("Dat is fout", 0, 7);
 			antwoorden[vraagnummer - 1] = 0;
-			Delay.msDelay(3000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
 			display.drawString("Dat is goed", 0, 7);
 			antwoorden[vraagnummer - 1] = 1;
-			Delay.msDelay(3000);
+			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		}
 	}
 

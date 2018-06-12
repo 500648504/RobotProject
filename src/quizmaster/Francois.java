@@ -18,7 +18,7 @@ import quizmaster.Vraag;
  * Na het stukje terugkijken, start de uiteindelijke quiz met vragen over dieren.
  * De dierenvragen staan allemaal in de class DierenQuiz.
  * De bewegingen en andere reacties van de robot worden gedefinieerd in de FysiekeReacties class.
- *
+ * @author Ilona
  */
 
 public class Francois {
@@ -44,7 +44,7 @@ public class Francois {
 	private final int LCD_VIJFDE_REGEL = 4;
 	private final int LCD_ZESDE_REGEL = 5;
 	private final int LCD_ZEVENDE_REGEL = 6;
-	private final int LCD_ACHTSTE_REGEL = 7;
+	
 	
 	
 	// Constructor voor quizmaster Francois
@@ -56,10 +56,7 @@ public class Francois {
 		
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		//reacties.schudHoofd();
-		//reacties.wiggle();
-		//reacties.pirouette();
-		//reacties.scared();
+		reacties.wiggle();
 		displayIntro();
 		eersteVraag();
 		
@@ -92,6 +89,7 @@ public class Francois {
 			nogEenKeer();
 		} else {
 			// launch methode met vraag over Jodi Bernal
+			reacties.pirouette();
 			fanJodiBernal();
 		}		
 	}
@@ -165,10 +163,12 @@ public class Francois {
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
 			display.drawString("Mooi!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+			reacties.wiggle();
 			startQuiz();
 			// naar de daadwerkelijke quiz
 		} else {
 			display.clear();
+			reacties.scared();
 			display.drawString("Jammer...", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
 			display.drawString("Mijn programmeurs", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
 			display.drawString("willen graag horen", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
@@ -199,7 +199,7 @@ public class Francois {
 	
 	// Naar de vragen van de quiz
 	public void quizVragen() {
-		dierenquiz = new DierenQuiz(this.vraag, this.display);
+		dierenquiz = new DierenQuiz(this.vraag, this.display, this.reacties);
 		dierenquiz.vraag1();
 		//vraag 1 roept de volgende vraag aan, enzovoorts
 		vraag.dankjewelTotZiens();
