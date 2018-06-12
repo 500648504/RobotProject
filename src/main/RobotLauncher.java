@@ -38,9 +38,9 @@ public class RobotLauncher {
 		RobotLauncher deRijdendeRobot = new RobotLauncher();			// Aanmaken object
 		deRijdendeRobot.startMenu();									// Openen menu
 		
+		System.out.println("gestopt");
+		Delay.msDelay(3000);
 		
-
-
 		}
 	
 	
@@ -59,7 +59,7 @@ public class RobotLauncher {
 			if(Button.LEFT.isDown())  selection = 1;
 			if(Button.ENTER.isDown()) selection = 2;
 			if(Button.RIGHT.isDown()) selection = 3;
-			if(Button.UP.isDown()) selection = 4;
+			if(Button.DOWN.isDown()) selection = 4;
 
 
 			switch (selection) {
@@ -70,7 +70,7 @@ public class RobotLauncher {
 					showMenu(display);
 					break; 
 				case 2:
-					display.drawString("Start Muziek Speler", 0, 7);
+					display.drawString("Start Muziek", 0, 7);
 					MuziekLezer MuziekReader = new MuziekLezer(brick);
 					MuziekReader.leesMuziek();
 					MuziekReader.speelMuziek();
@@ -88,19 +88,18 @@ public class RobotLauncher {
 				case (4):
 					menuLoop=false;
 					break;
-					}
+				}
 		}
 		
-		display.drawString("Gestopt", 0, 7);
-		
 	}
+	
+	
 	public static void showMenu(TextLCD display) {
-		
 		display.drawString("Kies programma:", 0, 1);
-		display.drawString("Links: Lijn", 0, 2);
-		display.drawString("Midden:Muziek", 0, 3);
-		display.drawString("Rechts:Quiz", 0, 4);
-		display.drawString("Escape:EV3 menu", 0, 5);
+		display.drawString("Links:  Lijn", 0, 2);
+		display.drawString("Midden: Muziek", 0, 3);
+		display.drawString("Rechts: Quiz", 0, 4);
+		display.drawString("Beneden:EV3 menu", 0, 5);
 	}
 	
 	

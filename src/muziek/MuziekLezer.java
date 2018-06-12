@@ -15,9 +15,9 @@ public class MuziekLezer {
 	private final int LEESSNELHEID = 300;				// Dit is hoe snel de robot rijdt.
 	private final int MUZIEKVOLUME = 10;				//
 	private final int NOOT_LENGTE_LEES = 400;
-	private final int NOOT_LENGTE_SPEEL = 200;
-	private final int [] NOOT_FREQ = { 440, 293, 329, 349, -1, -1, 391, -1 };
-	private final String [] NOOT_NAAMKLEUR = { "A - Rood", "D - Groen", "E - Blauw", "F - Geel", "", "", "G - Wit", "Rst -Zwart" };	
+	private final int NOOT_LENGTE_SPEEL = 300;
+	private final int [] NOOT_FREQ = { 440, 293, 329, 349, -1, -1, 391, 20000 };
+	private final String [] NOOT_NAAMKLEUR = { "A - Rood", "D - Groen", "E - Blauw", "F - Geel", "", "", "G - Wit", ". - Zwart" };	
 	private final int KLEUR_ZWART = 7;						// 7 is zwart, nodig voor stopconditie
 	
 	private TextLCD display;
@@ -55,6 +55,8 @@ public class MuziekLezer {
 				Sound.playTone(NOOT_FREQ[currentSample], NOOT_LENGTE_LEES);
 			}
 		
+		Motor.A.close();
+		Motor.D.close();
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
 	
 
@@ -67,15 +69,20 @@ public class MuziekLezer {
 		display.drawString("druk op een toets", 0 , 1);
 		Button.waitForAnyPress();
 		display.drawString("Speelt af...", 1, 3);
-		
-		for (int index = 0 ; index < sampleLijst.size() ; index ++) {
-			display.scroll();						//speelt de goede toon en laat hem op scherm zien
-			display.drawString(NOOT_NAAMKLEUR[index], 0, 0);
-			Sound.playTone(NOOT_FREQ[index], NOOT_LENGTE_SPEEL);	
+		int currentTone;
+		String currentString;
+		for (int index = (sampleLijst.size()-1) ; index >= 0 ; index --) {		//omgekeerd want de array wordt omgekeerd gevuld
+			display.clear(0);					//speelt de goede toon en laat hem op scherm zien
+			
+			currentTone = NOOT_FREQ[sampleLijst.get(index)];
+			currentString = NOOT_NAAMKLEUR[sampleLijst.get(index)];
+			display.drawString(currentString, 3, 0);
+			
+			Sound.playTone(currentTone, NOOT_LENGTE_SPEEL);	
 		}
-		
 		display.drawString("Ta da!", 7, 5);
-		display.drawString("druk op een toets", 0, 1);		
+		display.drawString("druk op een toets", 0, 1);
+		Button.waitForAnyPress();
 	}
 
 
@@ -86,7 +93,7 @@ public class MuziekLezer {
 		if (sampleLijst.get(0) == KLEUR_ZWART && 		// als arraynummer 0, 1 en 2 zwart zijn
 			sampleLijst.get(1) == KLEUR_ZWART && 		// dan is doorgaan = false
 			sampleLijst.get(2) == KLEUR_ZWART) {		// niet 3x zwart, dan doorgaan = true
-			return false;																			
+			return false;																		
 		}
 		return true;																				
 	}

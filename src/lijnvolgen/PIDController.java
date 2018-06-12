@@ -54,6 +54,8 @@ public class PIDController {
 			if (Button.ESCAPE.isDown()) {
 				Motor.A.stop();
 				Motor.D.stop();
+				Motor.A.close();
+				Motor.D.close();
 				sensor.close();
 				runCheck = false;
 			}
@@ -82,14 +84,15 @@ public class PIDController {
 	// Lees met de sensor en krijg een kleurwaarde terug
 	// Sensor staat in red modus
 	public float pollSensor(boolean log) {
+		
 		int sampleSize = sensor.sampleSize();
 		float[] redsample = new float[sampleSize];
 		sensor.getRedMode().fetchSample(redsample, 0);
 
 		if (log) {
 			
-			String displayString = "Sensor: " + Float.toString(redsample[0]);
-			display.drawString(displayString, 0, 0);
+			String displayString = "Sensor: ";
+			display.drawString(displayString, 0, 6);
 			display.scroll();
 		}
 		return redsample[0];
