@@ -22,7 +22,7 @@ public class Mazerunner {
 	private final int NOTE_LENGTH = 100;
 
 	public void runMaze() {
-		EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S1);
+		//EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S1);
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S3);
 		// SensorMode distanceMode = irSensor.getDistanceMode();
 
@@ -32,7 +32,7 @@ public class Mazerunner {
 
 		while (Button.ESCAPE.isUp()) {
 
-			touch.fetchSample(sampleTouch, 0);
+			//touch.fetchSample(sampleTouch, 0);
 			irSensor.fetchSample(sampleIR, 0);
 
 			if (sampleTouch[0] == 1) {
@@ -53,7 +53,7 @@ public class Mazerunner {
 			}
 		}
 
-		touch.close();
+		//touch.close();
 		irSensor.close();
 		System.out.println("STOP");
 		Button.waitForAnyPress();

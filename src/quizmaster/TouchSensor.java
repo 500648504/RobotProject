@@ -1,5 +1,6 @@
 package quizmaster;
 
+import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
@@ -15,14 +16,17 @@ public class TouchSensor {
 	// Variabelen
 	public final static int ANTWOORD_LINKS = 1;
 	public final static int ANTWOORD_RECHTS = 2;
-	EV3TouchSensor linksTouch = new EV3TouchSensor(SensorPort.S1);
-	EV3TouchSensor rechtsTouch = new EV3TouchSensor(SensorPort.S4);
+	private EV3TouchSensor linksTouch;
+	private EV3TouchSensor rechtsTouch;
 	private final int SENSOR_DELAY = 3000;
+	
 	
 	
 	//Constructor
 	public TouchSensor() {
-		
+		//System.out.println("sensoren aanmaken");
+		linksTouch = new EV3TouchSensor(SensorPort.S1);
+		rechtsTouch = new EV3TouchSensor(SensorPort.S4);		
 	}
 	
 	
@@ -45,7 +49,7 @@ public class TouchSensor {
 			return ANTWOORD_LINKS;
 		} else {
 			Delay.msDelay(SENSOR_DELAY);
-			return ANTWOORD_RECHTS;
+			return ANTWOORD_RECHTS;			
 		}
 	}
 	

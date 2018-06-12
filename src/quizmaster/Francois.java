@@ -1,13 +1,11 @@
 package quizmaster;
 
-import lejos.hardware.Button;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.Brick;
-import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.utility.Delay;
 import quizmaster.FysiekeReacties;
 import quizmaster.DierenQuiz;
+import quizmaster.Vraag;
 
 /**
  * Deze Class is de class die de hoofd functionaliteit voor de interactieve quiz bevat.
@@ -26,13 +24,11 @@ import quizmaster.DierenQuiz;
 public class Francois {
 
 	//Variabelen
-	private Brick brick;
 	private TextLCD display;
 	public final static int ANTWOORD_LINKS = 1;
-	private TouchSensor sensor = new TouchSensor();
 	private Vraag vraag;
 	private FysiekeReacties reacties = new FysiekeReacties();
-	private DierenQuiz dierenquiz = new DierenQuiz();
+	private DierenQuiz dierenquiz;
 	private final int TIJD_VOOR_SCHERM_LEZEN = 3500;
 	// deze tijd is in ms en geeft de gebruiker tijd om het scherm te lezen
 	// voordat het gewist wordt voor meer tekst.
@@ -41,13 +37,20 @@ public class Francois {
 	// de onderste regel 7 (y coordinaat). De x-coordinaat geeft de posities op
 	// de regel weer, positie 0 (geheel links) tot en met 17 (geheel rechts).
 	private final int LCD_LINKS_UITGELIJND = 0;
-	
+	private final int LCD_EERSTE_REGEL = 0;
+	private final int LCD_TWEEDE_REGEL = 1;
+	private final int LCD_DERDE_REGEL = 2;
+	private final int LCD_VIERDE_REGEL = 3;
+	private final int LCD_VIJFDE_REGEL = 4;
+	private final int LCD_ZESDE_REGEL = 5;
+	private final int LCD_ZEVENDE_REGEL = 6;
+	private final int LCD_ACHTSTE_REGEL = 7;
 	
 	
 	// Constructor voor quizmaster Francois
 	public Francois(Brick brick) {
-		this.brick = brick;
 		this.display = brick.getTextLCD();
+		this.vraag = new Vraag(display);
 	}
 	
 		
@@ -66,9 +69,9 @@ public class Francois {
 	// Intro voor quiz, Francois stelt zich voor.
 	public void displayIntro() {
 		display.clear();
-		display.drawString("Welkom! Ik ben uw", 0, 0);
-		display.drawString("Quizmaster!", 0, 1);
-		display.drawString("Ik heet Francois!", 0, 2);
+		display.drawString("Welkom! Ik ben uw", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+		display.drawString("Quizmaster!", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+		display.drawString("Ik heet Francois!", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
 		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 	}
 	
@@ -106,20 +109,20 @@ public class Francois {
 
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
-			display.drawString("Lijn en muziek", 0, 0);
-			display.drawString("starten vanuit", 0, 1);
-			display.drawString("het menu", 0, 2);
-			dankjewelTotZiens();
+			display.drawString("Lijn en muziek", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+			display.drawString("starten vanuit", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+			display.drawString("het menu", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
+			vraag.dankjewelTotZiens();
 			// terug naar menu
 
 		} else {
 			display.clear();
-			display.drawString("Vakantie!!!", 0, 0);
-			display.drawString("Ik ga nu naar", 0, 1);
-			display.drawString("Jodi Bernal luis-", 0, 2);
-			display.drawString("teren!", 0, 3);
-			display.drawString("Wat is er?", 0, 5);
-			display.drawString("Wat kijk je raar?", 0, 6);
+			display.drawString("Vakantie!!!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+			display.drawString("Ik ga nu naar", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+			display.drawString("Jodi Bernal luis-", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
+			display.drawString("teren!", LCD_LINKS_UITGELIJND, LCD_VIERDE_REGEL);
+			display.drawString("Wat is er?", LCD_LINKS_UITGELIJND, LCD_ZESDE_REGEL);
+			display.drawString("Wat kijk je raar?", LCD_LINKS_UITGELIJND, LCD_ZEVENDE_REGEL);
 			// launch methode met volgende vraag
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 			fanJodiBernal();
@@ -142,7 +145,7 @@ public class Francois {
 			
 		} else {
 			display.clear();
-			display.drawString("Dat is jammer!", 0, 0);
+			display.drawString("Dat is jammer!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
 			startQuiz();
 			// Naar de daadwerkelijke quiz
 		}
@@ -161,15 +164,15 @@ public class Francois {
 		
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
-			display.drawString("Mooi!", 0, 0);
+			display.drawString("Mooi!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
 			startQuiz();
 			// naar de daadwerkelijke quiz
 		} else {
 			display.clear();
-			display.drawString("Jammer...", 0, 0);
-			display.drawString("Mijn programmeurs", 0, 1);
-			display.drawString("willen graag horen", 0, 2);
-			display.drawString("hoe het wel moest", 0, 3);
+			display.drawString("Jammer...", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+			display.drawString("Mijn programmeurs", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+			display.drawString("willen graag horen", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
+			display.drawString("hoe het wel moest", LCD_LINKS_UITGELIJND, LCD_VIERDE_REGEL);
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 			startQuiz();
 			// naar de daadwerkelijke quiz
@@ -180,36 +183,28 @@ public class Francois {
 	// De daadwerkelijke start van de quiz, na het kort evalueren van de lijn en muziek functies
 	public void startQuiz() {
 		display.clear();
-		display.drawString("Dankje voor de", 0, 0);
-		display.drawString("korte evaluatie", 0, 1);
-		display.drawString("Maar nu de echte", 0, 3);
-		display.drawString("quizzzz!", 0, 4);
+		display.drawString("Dankje voor de", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+		display.drawString("korte evaluatie", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+		display.drawString("Maar nu de echte", LCD_LINKS_UITGELIJND, LCD_VIERDE_REGEL);
+		display.drawString("quizzzz!", LCD_LINKS_UITGELIJND, LCD_VIJFDE_REGEL);
 		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		display.clear();
-		display.drawString("Je kan 10 punten", 0, 0);
-		display.drawString("verdienen", 0, 1);
-		display.drawString("1 punt per vraag", 0, 2);
-		display.drawString("Op naar vraag 1", 0, 3);
+		display.drawString("Je kan 10 punten", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+		display.drawString("verdienen", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+		display.drawString("1 punt per vraag", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
+		display.drawString("Op naar vraag 1", LCD_LINKS_UITGELIJND, LCD_VIERDE_REGEL);
 		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		quizVragen();
 	}
 	
 	// Naar de vragen van de quiz
 	public void quizVragen() {
+		dierenquiz = new DierenQuiz(this.vraag, this.display);
 		dierenquiz.vraag1();
 		//vraag 1 roept de volgende vraag aan, enzovoorts
-		dankjewelTotZiens();
+		vraag.dankjewelTotZiens();
 	}
 	
-	// Methode waarin dankjewel en tot ziens wordt weergegeven (afsluiting en terug naar menu)
-	public void dankjewelTotZiens() {
-		display.drawString("Dankjewel!", 0, 4);
-		display.drawString("Tot Ziens!", 0, 5);
-		display.drawString("U keert nu terug", 0, 6);
-		display.drawString("naar het menu.", 0, 7);
-		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
-		sensor.closeSensors();
-		display.clear();
-	}
+	
 	
 }
