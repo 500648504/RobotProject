@@ -40,8 +40,8 @@ public class MuziekLezer {
 		Motor.D.setSpeed(LEESSNELHEID);
 		//Motor.A.forward();												// De motoren gaan voorwaarts 
 		//Motor.D.forward();
-		Motor.A.resetTachoCount();										// Het aantal omwentelingen wordt gereset, start op 0.
-		Motor.D.resetTachoCount();
+		//Motor.A.resetTachoCount();										// Het aantal omwentelingen wordt gereset, start op 0.
+		//Motor.D.resetTachoCount();
 
 
 		while (doorgaanMuziek()) {										// Zolang de methode doorgaan true is gaat het door.
@@ -82,9 +82,9 @@ public class MuziekLezer {
 			}
 		//}
 		sensor.close();							// na de methode stopt de scanner en stoppen de motoren.
-		Motor.A.stop(true);
-		Motor.D.stop(true);
-	
+//		Motor.A.stop(true);
+//		Motor.D.stop(true);
+//	
 		return;
 	}
 
@@ -92,10 +92,12 @@ public class MuziekLezer {
 		if (sampleLijst.size() < 3) { // eerst controleren of er wel 3 zijn
 			return true;
 		}
-		if (sampleLijst.get(0) == KLEUR_ZWART && sampleLijst.get(1) == KLEUR_ZWART && sampleLijst.get(2) == KLEUR_ZWART) {		// als arraynummer 0, 1 en 2 zwart zijn
-			return false;																			// dan is doorgaan = false
+		if (sampleLijst.get(0) == KLEUR_ZWART && 		// als arraynummer 0, 1 en 2 zwart zijn
+			sampleLijst.get(1) == KLEUR_ZWART && 		// dan is doorgaan = false
+			sampleLijst.get(2) == KLEUR_ZWART) {		// niet 3x zwart, dan doorgaan = true
+			return false;																			
 		}
-		return true;																				// niet 3x zwart, dan doorgaan = true
+		return true;																				
 	}
 
 }
