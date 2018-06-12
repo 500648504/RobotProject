@@ -29,8 +29,20 @@ public class DierenQuiz {
 	private int totaalScore = 0;
 	public final static int ANTWOORD_LINKS = 1;
 	public final static int ANTWOORD_RECHTS = 2;
+	private final int ARRAY_POSITIE_CORRECTIE = 1;
 	private Vraag vraag;
 	private FysiekeReacties reacties;
+	
+	// Het LeJos EV3 LCD scherm heeft 8 regels. De bovenste regel is regel 0,
+		// de onderste regel 7 (y coordinaat). De x-coordinaat geeft de posities op
+		// de regel weer, positie 0 (geheel links) tot en met 17 (geheel rechts).
+		private final int LCD_LINKS_UITGELIJND = 0;
+		private final int LCD_EERSTE_REGEL = 0;
+		private final int LCD_TWEEDE_REGEL = 1;
+		private final int LCD_VIERDE_REGEL = 3;
+		private final int LCD_ZESDE_REGEL = 5;
+		private final int LCD_ZEVENDE_REGEL = 6;
+		private final int LCD_ACHTSTE_REGEL = 7;
 
 	// constructor
 	public DierenQuiz(Vraag vraag, TextLCD display, FysiekeReacties reacties) {
@@ -190,12 +202,12 @@ public class DierenQuiz {
 	// Weergeven hoe je het hebt gedaan in de quiz
 	public void weergevenResultaat() {
 		display.clear();
-		display.drawString("We zijn klaar!", 0, 0);
-		display.drawString("Je hebt ", 0, 1);
-		display.drawString(naarString(totaalScore), 9, 1);
-		display.drawString("Gefeliciteerd!", 0, 3);
-		display.drawString("Dit is het einde", 0, 5);
-		display.drawString("van de quiz!", 0, 6);
+		display.drawString("We zijn klaar!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
+		display.drawString("Je hebt ", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
+		display.drawString(naarString(totaalScore), 9, LCD_TWEEDE_REGEL);
+		display.drawString("Gefeliciteerd!", LCD_LINKS_UITGELIJND, LCD_VIERDE_REGEL);
+		display.drawString("Dit is het einde", LCD_LINKS_UITGELIJND, LCD_ZESDE_REGEL);
+		display.drawString("van de quiz!", LCD_LINKS_UITGELIJND, LCD_ZEVENDE_REGEL);
 		reacties.pirouette();
 		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		display.clear();
@@ -214,13 +226,13 @@ public class DierenQuiz {
 	public void linksIsGoed(int keuze) {
 		if (keuze == ANTWOORD_LINKS) {
 			wisRegels();
-			display.drawString("Dat is goed", 0, 7);
-			antwoorden[vraagnummer - 1] = 1;
+			display.drawString("Dat is goed", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
+			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 1;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
-			display.drawString("Dat is fout", 0, 7);
-			antwoorden[vraagnummer - 1] = 0;
+			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
+			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		}
 	}
@@ -229,13 +241,13 @@ public class DierenQuiz {
 	public void linksIsFout(int keuze) {
 		if (keuze == ANTWOORD_LINKS) {
 			wisRegels();
-			display.drawString("Dat is fout", 0, 7);
-			antwoorden[vraagnummer - 1] = 0;
+			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, 7);
+			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
-			display.drawString("Dat is goed", 0, 7);
-			antwoorden[vraagnummer - 1] = 1;
+			display.drawString("Dat is goed", LCD_LINKS_UITGELIJND, 7);
+			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 1;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		}
 	}
