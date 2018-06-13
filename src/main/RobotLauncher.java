@@ -19,39 +19,35 @@ import theremin.ThereminSpeler;
  *         zijn 'Lijn volgen', 'Muziek spelen', 'Quiz spelen' en 'Theremin
  *         spelen'. Elk programma kan met een andere knop vroeg tijdig beindigd
  *         worden.
- *
  */
+
 public class RobotLauncher {
 
-	// geeft lego ding een naam
-	Brick brick; // Variable aangemaakt, naam brick.
+	Brick brick;												//Variable Brick heet nu brick
 
-	// Nieuwe robot constructor, lego ding
-	// Constructor voor de main.
-	public RobotLauncher() {
+	
+	public RobotLauncher() {									//Constructor genaamd RobotLauncher
 		super();
-		brick = LocalEV3.get(); // LocalEV 3 te benaderen met de cursor erop te staan en op C klikken
-		// TextLCD display = brick.getTextLCD();
+		brick = LocalEV3.get(); 								//Komt uit de reeds bestaande LocalEV3 klasse
+	
 	}
-
-	// main method, nieuwe robot gedefinieerd en roept test aan
-	public static void main(String[] args) {
-		RobotLauncher deRijdendeRobot = new RobotLauncher(); // Aanmaken object
-		deRijdendeRobot.startMenu(); // Openen menu
+	
+	public static void main(String[] args) {					// main method, nieuwe robot gedefinieerd en roept test aan
+		RobotLauncher deRijdendeRobot = new RobotLauncher(); 	// Aanmaken object, genaamd 'De Rijdende Robot'.
+		deRijdendeRobot.startMenu(); 							// Openen menu
 		System.out.println("");
 		System.out.println("==== gestopt ====");
-		Delay.msDelay(2000);
+		Delay.msDelay(2000);									// Laat de boodschap 'gestopt' nog twee seconden zien
 		System.exit(0);
 	}
 
-	public void startMenu() {
+	public void startMenu() {									// methode voor het startmenu
 
-		// Variabelen
 		boolean menuLoop = true;
 		TextLCD display = brick.getTextLCD();
 
-		showMenu(display);
-
+		showMenu(display);										// In de display wordt het menu getoond. Verschillende knoppen
+																// LEFT, ENTER, RIGHT en UP zijn gekoppeld aan een switch.
 		while (menuLoop) {
 			int selection = 0;
 			if (Button.LEFT.isDown())
@@ -65,7 +61,7 @@ public class RobotLauncher {
 			if (Button.DOWN.isDown())
 				selection = 5;
 
-			switch (selection) {
+			switch (selection) {								//Een switch welke de verschillende onderdelen selecteerd.
 			case 1:
 				display.clear(7);
 				display.drawString("Start Lijn Volgen", 0, 7);
@@ -111,7 +107,7 @@ public class RobotLauncher {
 
 	}
 
-	public static void showMenu(TextLCD display) {
+	public static void showMenu(TextLCD display) {							//De tekst die in de display wordt getoond
 		display.clear();
 		display.drawString("Kies programma:", 0, 0);
 		display.drawString("Links:  Lijn", 0, 2);
