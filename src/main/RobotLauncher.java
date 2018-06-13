@@ -37,8 +37,8 @@ public class RobotLauncher {
 		public static void main(String[] args) {
 		RobotLauncher deRijdendeRobot = new RobotLauncher();			// Aanmaken object
 		deRijdendeRobot.startMenu();									// Openen menu
-		
-		System.out.println("======gestopt");
+		System.out.println("");
+		System.out.println("==== gestopt ====");
 		Delay.msDelay(2000);
 		System.exit(0);
 		}
@@ -51,6 +51,8 @@ public class RobotLauncher {
 		boolean menuLoop = true;
 		TextLCD display = brick.getTextLCD();
 		
+		
+		
 		showMenu(display);
 		
 		
@@ -59,11 +61,13 @@ public class RobotLauncher {
 			if(Button.LEFT.isDown())  selection = 1;
 			if(Button.ENTER.isDown()) selection = 2;
 			if(Button.RIGHT.isDown()) selection = 3;
-			if(Button.DOWN.isDown()) selection = 4;
-
+			if(Button.UP.isDown())    selection = 4;
+			if(Button.DOWN.isDown())  selection = 5;
+			
 
 			switch (selection) {
 				case 1:
+					display.clear(7);
 					display.drawString("Start Lijn Volgen", 0, 7);
 					PIDController pid = new PIDController(); 		
 					while (true) {
@@ -74,10 +78,10 @@ public class RobotLauncher {
 							break;
 						}
 					pid.run();
-					}
-										
+					}										
 					break;
 				case 2:
+					display.clear(7);
 					display.drawString("Start Muziek", 0, 7);
 					MuziekLezer MuziekReader = new MuziekLezer(brick);
 					MuziekReader.leesMuziek();
@@ -85,15 +89,21 @@ public class RobotLauncher {
 					showMenu(display);
 					break;
 				case (3):
-					//System.out.println ("\nStart Maze Runner");
-					//Mazerunner Mazerunner = new Mazerunner();	
-					//Mazerunner.runMaze();
+					display.clear(7);
 					display.drawString("Start de Quiz", 0, 7);
 					Francois boulanger = new Francois(brick);
 					boulanger.runQuiz();
 					showMenu(display);
 					break; 
 				case (4):
+					display.clear(7);
+					display.drawString("Start Theremin",0 , 7);
+					Mazerunner Mazerunner = new Mazerunner(brick);	
+					Mazerunner.runMaze();
+					showMenu(display);
+					break;
+				case (5):
+					display.clear();
 					menuLoop=false;
 					break;
 				}
@@ -101,14 +111,14 @@ public class RobotLauncher {
 		
 	}
 	
-	
 	public static void showMenu(TextLCD display) {
 		display.clear();
-		display.drawString("Kies programma:", 0, 1);
+		display.drawString("Kies programma:", 0, 0);
 		display.drawString("Links:  Lijn", 0, 2);
 		display.drawString("Midden: Muziek", 0, 3);
 		display.drawString("Rechts: Quiz", 0, 4);
-		display.drawString("Beneden:EV3 menu", 0, 5);
+		display.drawString("Omhoog: Theremin", 0, 5);
+		display.drawString("Beneden:EV3 menu", 0, 7);
 	}
 	
 	

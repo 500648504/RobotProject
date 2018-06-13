@@ -108,7 +108,6 @@ public class MuziekLezer {
 		display.clear();														// Na het afspelen van de kleuren komt de tekst:
 		display.drawString("Ta da!", 7, 5);										// Ta Da! (op plek 7,5)
 		display.drawString("druk op een toets", 0, 1);
-		Delay.msDelay(1000);
 		Button.waitForAnyPress();
 		Delay.msDelay(2000);
 	}
