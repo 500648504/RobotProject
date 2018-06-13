@@ -56,7 +56,7 @@ public class QuizIntroFrancois {
 		
 	// Start de Quizzzzz!
 	public void runQuiz() {
-		reacties.wiggle();
+
 		displayIntro();
 		eersteVraag();
 		

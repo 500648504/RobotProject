@@ -1,6 +1,8 @@
 package quizmaster;
 
+import lejos.hardware.Sound;
 import lejos.hardware.motor.Motor;
+import lejos.utility.Delay;
 
 
 /**
@@ -54,6 +56,23 @@ public class FysiekeReacties {
 	public void scared() {
 		rupsRijBeweging(SCARED_DISTANCE, SCARED_SPEED, BACKWARD);
 		rupsRijBeweging(SCARED_DISTANCE, (SCARED_SPEED / SCARED_SLOW_FACTOR), FORWARD);
+	}
+	
+	public void playCorrect () {
+		Sound.playTone(329, 100); //noot g
+		Delay.msDelay(100);
+		Sound.playTone(329, 100); //noot g
+		Delay.msDelay(100);
+		Sound.playTone(329, 100); //noot g
+		Delay.msDelay(100);
+		Sound.playTone(523, 600); //noot hoge c
+	}
+	
+	public void playWrong () {
+		Sound.playTone(311, 200); //noot d#
+		Sound.playTone(293, 200); //noot d
+		Sound.playTone(277, 200); //noot c#
+		Sound.playTone(261, 600); //noot c
 	}
 
 	// algemene methode voor hoofdbeweging (motor B)

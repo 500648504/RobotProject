@@ -226,11 +226,13 @@ public class QuizDieren {
 	public void linksIsGoed(int keuze) {
 		if (keuze == ANTWOORD_LINKS) {
 			wisRegels();
+			reacties.playCorrect();
 			display.drawString("Dat is goed", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 1;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
+			reacties.playWrong();
 			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
 			reacties.schudHoofd();
@@ -242,12 +244,14 @@ public class QuizDieren {
 	public void linksIsFout(int keuze) {
 		if (keuze == ANTWOORD_LINKS) {
 			wisRegels();
+			reacties.playWrong();
 			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, 7);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
 			reacties.schudHoofd();
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();
+			reacties.playCorrect();
 			display.drawString("Dat is goed", LCD_LINKS_UITGELIJND, 7);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 1;
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
