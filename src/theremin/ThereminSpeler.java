@@ -7,7 +7,6 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
-import lejos.hardware.sensor.SensorMode;
 import lejos.utility.Delay;
 
 /**
@@ -19,13 +18,13 @@ import lejos.utility.Delay;
 public class ThereminSpeler {
 
 	// *Majeur toonladder
-	private final int[] NOTE_FREQ = new int[] { 20000, 523, 494, 440, 391, 349, 329, 293, 261, 20 };
+	private final int[] NOTE_FREQ = new int[] { 20000, 523, 494, 440, 391, 349, 329, 293, 261, 20000 };
 	private final String[] NOTE_NAME = new String[] { "too close", "C", "B", "A", "G", "F", "E", "D", "C", "too far" };
 	private final int[] NOTE_DIST_TARGET = new int[] { 5, 10, 15, 20, 25, 30, 35, 40, 45, 100 };
 
 	// //*Bluesladder
 	// private final int[] NOTE_FREQ = new int[]
-	// { 20, 523, 466, 392, 370, 349, 311, 261, 20 };
+	// { 20000, 523, 466, 392, 370, 349, 311, 261, 20000 };
 	// private final String[] NOTE_NAME = new String[]
 	// { "too close", "C", "Bb", "G", "F#", "F", "Eb", "C", "too far" };
 	// private final int[] NOTE_DIST_TARGET = new int[]
