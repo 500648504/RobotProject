@@ -12,7 +12,6 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
 
 
-
 /**
  * @author robotgroup
  * De robot neemt een bepaalde kleur waar via de kleurensensor. 
@@ -23,13 +22,12 @@ import lejos.utility.Delay;
  *
  */
 
-
 public class MuziekLezer {
 							
 	private final int LEESSNELHEID = 300;								// Dit is hoe snel de robot rijdt.
 	private final int MUZIEKVOLUME = 10;								// Volume van de muziek
 	private final int NOOT_LENGTE_LEES = 400;							// Dit is hoelang de toon wordt afgespeeld, direct (tijdens het rijden)
-	private final int NOOT_LENGTE_SPEEL = 300;							// Dit is hoelang de toon wordt afgespeeld, achteraf (via array)
+	private final int NOOT_LENGTE_SPEEL = 250;							// Dit is hoelang de toon wordt afgespeeld, achteraf (via array)
 	private final int [] NOOT_FREQ = { 440, 293, 329, 349, -1, -1, 391, 20000 };	// Alle frequenties staan in een Array. 
 	private final String [] NOOT_NAAMKLEUR = { "A - Rood", "D - Groen", "E - Blauw", "F - Geel", "", "", "G - Wit", ". - Zwart" };  // De kleuren staan ook in een Array, samengevoegd met de noot. 	
 	private final int KLEUR_ZWART = 7;									// 7 is zwart, nodig voor stopconditie
@@ -37,7 +35,6 @@ public class MuziekLezer {
 	private TextLCD display;											// Het object display wordt opgehaald.
 	private ArrayList<Integer> sampleLijst = new ArrayList<>(); 	  	// Arraylist, deze wordt gevuld met de kleurwaardes die gescand worden.
 	int currentSample;													// De waarde van een lichtmeting (dit is een integer)
-	
 	
 	// Constructor
 	public MuziekLezer(Brick brick) {									// Constructor met de brick (De EV3, het lego object)		
@@ -67,12 +64,10 @@ public class MuziekLezer {
 				if (currentSample == -1) {								//onze zwart was op het eind van de week niet zwart genoeg meer,
 					currentSample = KLEUR_ZWART ;						//en werd vaak gemeten als -1, wat het programma stopte omdat hij dan
 				}														//index -1 leest. Daarom zetten we -1 terug naar zwart.
-				
-				
+							
 				sampleLijst.add(0, currentSample); 						// Stopt gescande kleur sampleLijst Array
 				
-				
-				
+							
 				display.scroll();												//speelt de goede toon en laat hem op scherm zien
 				
 				display.drawString(NOOT_NAAMKLEUR[currentSample], 0, 7);		// Laat de toon op het scherm zien (op basis van gescande nummer, zoekt plek in de array op) en verteld de positie  waarop deze op het scherm moet komen 0.7
@@ -83,7 +78,6 @@ public class MuziekLezer {
 		sensor.close();															// na de methode stopt de scanner en stoppen de motoren.
 
 	
-
 		return;
 	}
 	
@@ -113,7 +107,6 @@ public class MuziekLezer {
 		Delay.msDelay(2000);
 	}
 
-
 	public boolean doorgaanMuziek() { // drie keer zwart is stop
 		if (sampleLijst.size() < 3) { // eerst controleren of er wel 3 zijn
 			return true;
@@ -126,24 +119,3 @@ public class MuziekLezer {
 		return true;																				
 	}
 }
-
-
-//switch (currentSample) {				// Kiest op basis van de gescande kleur een switch.
-//case 0: // Rood	 						// Rood geeft altijd het cijfer 0.
-//	Sound.playTone(NOOT_A, NOOT_LENGTE);// Frequentie & Duur, wij hebben hier dus zelf de toon A van gemaakt, namelijk frequentie 440 ingesteld.
-//	break;								// Speelt 1x kleur af, daarna break.
-//case 1: // Groen 
-//	Sound.playTone(NOOT_D, NOOT_LENGTE);
-//	break; 
-//case 2: // Blauw 
-//	Sound.playTone(NOOT_E, NOOT_LENGTE);
-//	break;
-//case 3: // Geel 
-//	Sound.playTone(NOOT_F, NOOT_LENGTE);
-//	break;
-//case 6: // Wit (toon G)
-//	Sound.playTone(NOOT_G, NOOT_LENGTE);
-//	break;
-//case 7: // Zwart (Geen toon)
-//	Delay.msDelay(NOOT_LENGTE - ZWART_CORR);
-//	break;
