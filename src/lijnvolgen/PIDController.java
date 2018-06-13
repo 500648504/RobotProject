@@ -21,14 +21,14 @@ public class PIDController {
 
 	// Variabelen
 	public EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
-	private final float TARGET = 0.35f; 	// Dit is het doel van de sensor: 0.35 is wat de sensor meet op de 'Sweet spot' op de lijn
-	private final float P_CONTROL = 265; 	// P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde
-											// te komen
+	private final float TARGET = 0.32f; 	// Dit is het doel van de sensor: 0.32 is wat de sensor meet op de 'Sweet spot' op de lijn
+	private final float P_CONTROL = 300; 	// P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde
+											// te komen. In lekentaal: heden 
 	private final float I_CONTROL = 30; 	// I = Integrator. Kijkt naar duur/tijd en groote van afwijking ten opzichte van
-											// de lijn.
+											// de lijn. Ook wel: verleden
 	private final float D_CONTROL = 500; 	// D = Differantiator. Kijkt niet naar de afwijking zelf, maar naar hoe snel
-											// deze groeit.
-	private final float BASE_SPEED = 180; 	// De snelheid van onze robot
+											// deze groeit. Ofwel: de toekomst
+	private final float BASE_SPEED = 250; 	// De snelheid van onze robot
 	private float leftSpeed, rightSpeed; 	// De snelheid van de linker en de rechter motor
 	private float sensorData; 				// De output van de sensor
 	private float integral = 0; 			// Voor het berekenen van totalen, in dit geval de totale verandering van de
