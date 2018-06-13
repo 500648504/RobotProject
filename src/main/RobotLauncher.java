@@ -95,7 +95,7 @@ public class RobotLauncher {
 				display.clear(7);
 				display.drawString("Start Theremin", 0, 7);
 				ThereminSpeler ThereminSpeler = new ThereminSpeler(brick);
-				ThereminSpeler.runMaze();
+				ThereminSpeler.thereminInstrument();
 				showMenu(display);
 				break;
 			case (5):

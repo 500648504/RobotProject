@@ -53,7 +53,7 @@ public class ThereminSpeler {
 	}
 
 	// hoofdmethode voor het bespelen van de Theremin
-	public void runMaze() { 												
+	public void thereminInstrument() { 												
 		EV3TouchSensor touchL = new EV3TouchSensor(SensorPort.S1); 			// sensors toewijzen: linker touchsensor
 		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S3); 				// en IR sensor
 		irSensor.getDistanceMode(); 										// IR sensor in Distancemode zetten
