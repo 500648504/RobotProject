@@ -17,10 +17,10 @@ import lejos.utility.Delay;
  *         die genomen wordt, wordt in beeld getoond zodat er bij afwijkingen
  *         makkelijker mee kan worden gewerkt.
  */
-public class PIDController {
+public class LijnVolgen {
 
 	// Variabelen
-	public EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
+	private EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S2);
 	private final float TARGET = 0.32f; 	// Dit is het doel van de sensor: 0.32 is wat de sensor meet op de 'Sweet spot' op de lijn
 	private final float P_CONTROL = 300; 	// P = Proportionele regelaar - Hoeveel heb je nodig om bij de gewenste waarde
 											// te komen. In lekentaal: heden 
@@ -51,7 +51,7 @@ public class PIDController {
 
 		leftSpeed = BASE_SPEED + P_CONTROL * err + I_CONTROL * integral + D_CONTROL * deriv;
 		rightSpeed = BASE_SPEED - (P_CONTROL * err + I_CONTROL * integral + D_CONTROL * deriv);
-		Drive.drive(leftSpeed, rightSpeed);
+		CorrectieRichting.correctie(leftSpeed, rightSpeed);
 	}
 
 	// Lees met de sensor en krijg een kleurwaarde terug

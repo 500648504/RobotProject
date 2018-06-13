@@ -4,7 +4,7 @@ import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.Brick;
 import lejos.utility.Delay;
 import quizmaster.FysiekeReacties;
-import quizmaster.DierenQuiz;
+import quizmaster.QuizDieren;
 import quizmaster.Vraag;
 
 /**
@@ -21,14 +21,14 @@ import quizmaster.Vraag;
  * @author Ilona
  */
 
-public class Francois {
+public class QuizIntroFrancois {
 
 	//Variabelen
 	private TextLCD display;
 	public final static int ANTWOORD_LINKS = 1;
 	private Vraag vraag;
 	private FysiekeReacties reacties = new FysiekeReacties();
-	private DierenQuiz dierenquiz;
+	private QuizDieren dierenquiz;
 	private final int TIJD_VOOR_SCHERM_LEZEN = 3500;
 	// deze tijd is in ms en geeft de gebruiker tijd om het scherm te lezen
 	// voordat het gewist wordt voor meer tekst.
@@ -48,7 +48,7 @@ public class Francois {
 	
 	
 	// Constructor voor quizmaster Francois
-	public Francois(Brick brick) {
+	public QuizIntroFrancois(Brick brick) {
 		this.display = brick.getTextLCD();
 		this.vraag = new Vraag(display);
 	}
@@ -199,7 +199,7 @@ public class Francois {
 	
 	// Naar de vragen van de quiz
 	public void quizVragen() {
-		dierenquiz = new DierenQuiz(this.vraag, this.display, this.reacties);
+		dierenquiz = new QuizDieren(this.vraag, this.display, this.reacties);
 		dierenquiz.vraag1();
 		//vraag 1 roept de volgende vraag aan, enzovoorts
 		vraag.dankjewelTotZiens();

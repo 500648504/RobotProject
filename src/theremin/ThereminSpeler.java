@@ -1,4 +1,4 @@
-package doolhof;
+package theremin;
 
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
@@ -16,7 +16,7 @@ import lejos.utility.Delay;
  *         linker druk sensor regelt het volume: ingedrukt houden maakt de toon
  *         luider, loslaten laat hem langzaam weer in volume zakken.
  */
-public class Mazerunner {
+public class ThereminSpeler {
 
 	// *Majeur toonladder
 	private final int[] NOTE_FREQ = new int[] { 20000, 523, 494, 440, 391, 349, 329, 293, 261, 20 };
@@ -37,7 +37,7 @@ public class Mazerunner {
 	private int noteVolume = 0;
 	private TextLCD display;
 
-	public Mazerunner(Brick brick) {
+	public ThereminSpeler(Brick brick) {
 		this.display = brick.getTextLCD();
 	}
 

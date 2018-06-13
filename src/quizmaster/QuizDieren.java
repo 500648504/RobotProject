@@ -17,7 +17,7 @@ import quizmaster.Vraag;
  */
 
 
-public class DierenQuiz {
+public class QuizDieren {
 
 	// Variabelen
 	private int[] antwoorden;
@@ -27,8 +27,8 @@ public class DierenQuiz {
 	private int vraagnummer;
 	private int keuze;
 	private int totaalScore = 0;
-	public final static int ANTWOORD_LINKS = 1;
-	public final static int ANTWOORD_RECHTS = 2;
+	private final static int ANTWOORD_LINKS = 1;
+	private final static int ANTWOORD_RECHTS = 2;
 	private final int ARRAY_POSITIE_CORRECTIE = 1;
 	private Vraag vraag;
 	private FysiekeReacties reacties;
@@ -45,7 +45,7 @@ public class DierenQuiz {
 		private final int LCD_ACHTSTE_REGEL = 7;
 
 	// constructor
-	public DierenQuiz(Vraag vraag, TextLCD display, FysiekeReacties reacties) {
+	public QuizDieren(Vraag vraag, TextLCD display, FysiekeReacties reacties) {
 		this.vraag = vraag;
 		this.display = display;
 		this.reacties = reacties;
@@ -233,6 +233,7 @@ public class DierenQuiz {
 			wisRegels();
 			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
+			reacties.schudHoofd();
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		}
 	}
@@ -243,6 +244,7 @@ public class DierenQuiz {
 			wisRegels();
 			display.drawString("Dat is fout", LCD_LINKS_UITGELIJND, 7);
 			antwoorden[vraagnummer - ARRAY_POSITIE_CORRECTIE] = 0;
+			reacties.schudHoofd();
 			Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
 		} else {
 			wisRegels();

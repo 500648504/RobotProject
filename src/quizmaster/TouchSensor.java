@@ -13,8 +13,8 @@ import lejos.utility.Delay;
 public class TouchSensor {
 	
 	// Variabelen
-	public final static int ANTWOORD_LINKS = 1;
-	public final static int ANTWOORD_RECHTS = 2;
+	private final static int ANTWOORD_LINKS = 1;
+	private final static int ANTWOORD_RECHTS = 2;
 	private EV3TouchSensor linksTouch;
 	private EV3TouchSensor rechtsTouch;
 	private final int SENSOR_DELAY = 3000;

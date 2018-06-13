@@ -8,10 +8,10 @@ import lejos.hardware.motor.Motor;
  * een links en een rechts. Gelijke snelheid is rechtdoor, afwijking naar een kant is draaien.
  */
 
-class Drive {
+class CorrectieRichting {
 	
 	//De methode om de robot te laten rijden en bijsturen
-	public static void drive(float links, float rechts) {
+	public static void correctie(float links, float rechts) {
 		// D-> to left A-> to right
 		Motor.D.setSpeed(Math.abs(links));
 		Motor.A.setSpeed(Math.abs(rechts));

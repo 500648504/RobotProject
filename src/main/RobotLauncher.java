@@ -1,6 +1,5 @@
 package main;
-import doolhof.Mazerunner;
-import quizmaster.Francois;
+import quizmaster.QuizIntroFrancois;
 import lejos.hardware.Brick;
 import lejos.hardware.Button;
 import lejos.hardware.Key;
@@ -9,9 +8,10 @@ import lejos.hardware.lcd.LCD;
 import lejos.hardware.lcd.TextLCD;
 import lejos.hardware.motor.Motor;
 import lejos.utility.Delay;
-import lijnvolgen.PIDController;
+import lijnvolgen.LijnVolgen;
 import muziek.MuziekLezer;
 import tests.*;
+import theremin.ThereminSpeler;
 
 public class RobotLauncher {
 	
@@ -69,7 +69,7 @@ public class RobotLauncher {
 				case 1:
 					display.clear(7);
 					display.drawString("Start Lijn Volgen", 0, 7);
-					PIDController pid = new PIDController(); 		
+					LijnVolgen pid = new LijnVolgen(); 		
 					while (true) {
 						if (Button.ESCAPE.isDown()) {
 							Motor.A.stop();
@@ -91,15 +91,15 @@ public class RobotLauncher {
 				case (3):
 					display.clear(7);
 					display.drawString("Start de Quiz", 0, 7);
-					Francois boulanger = new Francois(brick);
-					boulanger.runQuiz();
+					QuizIntroFrancois QuizIntro = new QuizIntroFrancois(brick);
+					QuizIntro.runQuiz();
 					showMenu(display);
 					break; 
 				case (4):
 					display.clear(7);
 					display.drawString("Start Theremin",0 , 7);
-					Mazerunner Mazerunner = new Mazerunner(brick);	
-					Mazerunner.runMaze();
+					ThereminSpeler ThereminSpeler = new ThereminSpeler(brick);	
+					ThereminSpeler.runMaze();
 					showMenu(display);
 					break;
 				case (5):
