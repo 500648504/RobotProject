@@ -21,11 +21,8 @@ public class FysiekeReacties {
 	private final static int SHAKE_DISTANCE = 45;
 	private final static int SHAKE_SPEED = 200;
 
-	private final static int WIGGLE_DISTANCE = 20;
-	private final static int WIGGLE_SPEED = 1000;
-
-	private final static int PIROUETTE_DISTANCE = 1250;
-	private final static int PIROUETTE_SPEED = 400;
+	private final static int PIROUETTE_DISTANCE = 1420;
+	private final static int PIROUETTE_SPEED = 500;
 
 	private final static int SCARED_DISTANCE = 720;
 	private final static int SCARED_SPEED = 1000;
@@ -39,17 +36,10 @@ public class FysiekeReacties {
 		Motor.B.stop(true);
 	}
 
-	// robot draait heen en terug met zijn hele lijf
-	public void wiggle() {
-		rupsDraaiBeweging(WIGGLE_DISTANCE, WIGGLE_SPEED, FORWARD);
-		rupsDraaiBeweging((WIGGLE_DISTANCE), WIGGLE_SPEED, BACKWARD);
-		rupsDraaiBeweging((WIGGLE_DISTANCE), WIGGLE_SPEED, BACKWARD);
-		rupsDraaiBeweging(WIGGLE_DISTANCE, WIGGLE_SPEED, FORWARD);
-	}
 
 	// robot draait om zijn as
 	public void pirouette() {
-		rupsDraaiBeweging(PIROUETTE_DISTANCE, PIROUETTE_SPEED, BACKWARD);
+		rupsDraaiBeweging(PIROUETTE_DISTANCE, PIROUETTE_SPEED);
 	}
 
 	// robot 'schrikt' naar achteren en rijdt langzaam terug
@@ -59,20 +49,20 @@ public class FysiekeReacties {
 	}
 	
 	public void playCorrect () {
-		Sound.playTone(329, 100); //noot g
+		Sound.playTone(329, 100); //noot g, kort
 		Delay.msDelay(100);
-		Sound.playTone(329, 100); //noot g
+		Sound.playTone(329, 100); //noot g, kort
 		Delay.msDelay(100);
-		Sound.playTone(329, 100); //noot g
+		Sound.playTone(329, 100); //noot g, kort
 		Delay.msDelay(100);
-		Sound.playTone(523, 600); //noot hoge c
+		Sound.playTone(523, 600); //noot hoge c, lang
 	}
 	
 	public void playWrong () {
-		Sound.playTone(311, 200); //noot d#
-		Sound.playTone(293, 200); //noot d
-		Sound.playTone(277, 200); //noot c#
-		Sound.playTone(261, 600); //noot c
+		Sound.playTone(311, 200); //noot d# , medium lengte
+		Sound.playTone(293, 200); //noot d, medium lengte
+		Sound.playTone(277, 200); //noot c#, medium lengte
+		Sound.playTone(261, 600); //noot c, medium lengte
 	}
 
 	// algemene methode voor hoofdbeweging (motor B)
@@ -83,20 +73,10 @@ public class FysiekeReacties {
 	}
 
 	// algemene methode voor draaibeweging met rupsbanden (A en D).
-	public void rupsDraaiBeweging(int distance, int speed, String direction) {
-		resetCountAD();
+	public void rupsDraaiBeweging(int distance, int speed) {
 		setSpeedAD(speed);
-		if (direction.equals(FORWARD)) { // bepalen linksom of rechtsom draaien
-			while (Motor.A.getTachoCount() < distance) {
-				Motor.A.forward();
-				Motor.D.backward();
-			}
-		} else
-			while (Motor.D.getTachoCount() < distance) {
-				Motor.A.backward();
-				Motor.D.forward();
-			}
-		setSpeedAD(STOP_SPEED);
+		Motor.A.rotateTo(distance, true);
+		Motor.D.rotateTo(-distance, true);
 	}
 
 	// algemene methode voor rijbeweging met rupsbanden (A en D)

@@ -25,7 +25,8 @@ import lejos.utility.Delay;
 public class MuziekLezer {
 							
 	private final int LEESSNELHEID = 300;								// Dit is hoe snel de robot rijdt.
-	private final int MUZIEKVOLUME = 10;								// Volume van de muziek
+	private final int LEESAFSTAND = 120;
+	private final int MUZIEKVOLUME = 50;								// Volume van de muziek
 	private final int NOOT_LENGTE_LEES = 400;							// Dit is hoelang de toon wordt afgespeeld, direct (tijdens het rijden)
 	private final int NOOT_LENGTE_SPEEL = 250;							// Dit is hoelang de toon wordt afgespeeld, achteraf (via array)
 	private final int [] NOOT_FREQ = { 440, 293, 329, 349, -1, -1, 391, 20000 };	// Alle frequenties staan in een Array. 
@@ -56,8 +57,8 @@ public class MuziekLezer {
 				break;
 			}
 			
-			Motor.A.rotate(120, true);									//Motor draait elke keer 120 graden van een hele omwenteling (360)
-			Motor.D.rotate(120, true);									//en activeert de sensor (en evt neutron cannon)
+			Motor.A.rotate(LEESAFSTAND, true);							//Motor draait elke keer 120 graden van een hele omwenteling (360)
+			Motor.D.rotate(LEESAFSTAND, true);							//en activeert de sensor (en evt neutron cannon)
 			
 			currentSample = sensor.getColorID(); 						// Haalt gescande kleur op.
 				

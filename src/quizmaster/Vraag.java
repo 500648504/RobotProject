@@ -61,7 +61,7 @@ public class Vraag {
 		display.drawString("Tot Ziens!", LCD_LINKS_UITGELIJND, LCD_ZESDE_REGEL);
 		display.drawString("U keert nu terug", LCD_LINKS_UITGELIJND, LCD_ZEVENDE_REGEL);
 		display.drawString("naar het menu.", LCD_LINKS_UITGELIJND, LCD_ACHTSTE_REGEL);
-		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN*2);
 		sensor.closeSensors();
 		display.clear();
 	}

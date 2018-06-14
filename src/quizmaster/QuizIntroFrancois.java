@@ -58,6 +58,7 @@ public class QuizIntroFrancois {
 	public void runQuiz() {
 
 		displayIntro();
+		reacties.scared();
 		eersteVraag();
 		
 	}
@@ -69,7 +70,7 @@ public class QuizIntroFrancois {
 		display.drawString("Welkom! Ik ben uw", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
 		display.drawString("Quizmaster!", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
 		display.drawString("Ik heet Francois!", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);
-		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN*3);
 	}
 	
 	
@@ -89,7 +90,6 @@ public class QuizIntroFrancois {
 			nogEenKeer();
 		} else {
 			// launch methode met vraag over Jodi Bernal
-			reacties.pirouette();
 			fanJodiBernal();
 		}		
 	}
@@ -163,12 +163,10 @@ public class QuizIntroFrancois {
 		if (keuze == ANTWOORD_LINKS) {
 			display.clear();
 			display.drawString("Mooi!", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
-			reacties.wiggle();
 			startQuiz();
 			// naar de daadwerkelijke quiz
 		} else {
 			display.clear();
-			reacties.scared();
 			display.drawString("Jammer...", LCD_LINKS_UITGELIJND, LCD_EERSTE_REGEL);
 			display.drawString("Mijn programmeurs", LCD_LINKS_UITGELIJND, LCD_TWEEDE_REGEL);
 			display.drawString("willen graag horen", LCD_LINKS_UITGELIJND, LCD_DERDE_REGEL);

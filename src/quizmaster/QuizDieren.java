@@ -33,7 +33,7 @@ public class QuizDieren {
 	private Vraag vraag;
 	private FysiekeReacties reacties;
 	
-	// Het LeJos EV3 LCD scherm heeft 8 regels. De bovenste regel is regel 0,
+		// Het LeJos EV3 LCD scherm heeft 8 regels. De bovenste regel is regel 0,
 		// de onderste regel 7 (y coordinaat). De x-coordinaat geeft de posities op
 		// de regel weer, positie 0 (geheel links) tot en met 17 (geheel rechts).
 		private final int LCD_LINKS_UITGELIJND = 0;
@@ -209,7 +209,7 @@ public class QuizDieren {
 		display.drawString("Dit is het einde", LCD_LINKS_UITGELIJND, LCD_ZESDE_REGEL);
 		display.drawString("van de quiz!", LCD_LINKS_UITGELIJND, LCD_ZEVENDE_REGEL);
 		reacties.pirouette();
-		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN);
+		Delay.msDelay(TIJD_VOOR_SCHERM_LEZEN*3);
 		display.clear();
 	}
 
